@@ -55,6 +55,7 @@
     <Compile Include="EventArgs\CommandInvokeEventArgs.cs" />
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />
     <Compile Include="Exceptions\DuplicateInsertingException.cs" />
+    <Compile Include="Exceptions\EntryNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidCommandException.cs" />
     <Compile Include="Exceptions\NoCommandArgumentException.cs" />
     <Compile Include="Exceptions\NoCommandFoundException.cs" />

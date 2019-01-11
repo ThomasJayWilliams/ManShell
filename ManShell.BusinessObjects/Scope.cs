@@ -37,6 +37,8 @@ namespace ManShell.BusinessObjects
             if (this._actualScopes.Count > 0)
                 this._actualScopes.Peek().Child = scope;
             this._actualScopes.Push(scope);
+
+            this._name = scope.Name;
         }
 
         public Scope(IScope actual)

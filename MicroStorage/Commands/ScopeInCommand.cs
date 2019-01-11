@@ -30,14 +30,12 @@ namespace MicroStorage
 
         public void Invoke()
         {
-            LocalScopeManager current = LocalScopeManager.Current;
-            string data = FileManager.GetData();
+            ScopeType type = ScopeType.Enviroment;
 
-            ScopeType type = DataManager.Data.Categories
-                .ToList<Category>().Find(c => c.CategoryName == this._argument).GetType() == typeof(Entry) ? ScopeType.Entry
-                    : ScopeType.Category;
+            if (!DataManager.GetTypeByName(this._argument, ref type))
+                throw new InvalidScopeException();
 
-            current.SetScope(this._argument, type);
+            LocalScopeManager.Current.SetScope(this._argument, type);
 
             this._isSuccessfull = true;
         }

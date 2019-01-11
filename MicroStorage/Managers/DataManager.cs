@@ -76,7 +76,7 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(categoryName) || string.IsNullOrEmpty(entryName))
                 throw new ArgumentNullException();
 
-            if (!IsElementExist(entryName))
+            if (IsElementExist(entryName))
                 throw new DuplicateInsertingException();
 
             Entry entry = new Entry()
@@ -130,6 +130,29 @@ namespace MicroStorage
             category = _data.Categories.ToList<Category>().Find(c => string.CompareOrdinal(c.CategoryName, name) == 0);
 
             return category;
+        }
+
+        public static bool GetTypeByName(string element, ref ScopeType type)
+        {
+            if (string.IsNullOrEmpty(element))
+                throw new ArgumentNullException();
+
+            if (!IsElementExist(element))
+                return false;
+
+            if (GetEntryByName(element) != null)
+            {
+                type = ScopeType.Entry;
+                return true;
+            }
+
+            if (GetCategoryByName(element) != null)
+            {
+                type = ScopeType.Category;
+                return true;
+            }
+
+            return false;
         }
 
         internal static bool IsElementExist(string name)
