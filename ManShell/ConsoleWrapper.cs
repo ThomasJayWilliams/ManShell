@@ -43,11 +43,16 @@ namespace ManShell
         private static void WriteScope()
         {
             Scope currentScope = ScopeManager.Current.GetCurrentScope();
+            Stack<IScope> tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
 
-            foreach (IScope item in currentScope.ActualScopes)
+            for (int i = 0; i < currentScope.ActualScopes.Count; i++)
             {
-                Write(item.Name, ScopeColor);
-                Write("@", IndexColor);
+                IScope scope = tempStack.Pop();
+                if (scope != null)
+                {
+                    Write(scope.Name, ScopeColor);
+                    Write("@", IndexColor);
+                }
             }
             Write(": ", OutputColor);
         }

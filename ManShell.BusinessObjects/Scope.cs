@@ -29,13 +29,25 @@ namespace ManShell.BusinessObjects
             get { return this._actualScopes; }
         }
 
+        public void AddScope(IScope scope)
+        {
+            if (scope == null)
+                throw new ArgumentNullException();
+
+            if (this._actualScopes.Count > 0)
+                this._actualScopes.Peek().Child = scope;
+            this._actualScopes.Push(scope);
+        }
+
         public Scope(IScope actual)
         {
             if (actual == null)
                 throw new ArgumentNullException();
 
             this._name = actual.Name;
-            this._actualScopes = new Stack<IScope>();
+
+            if (this._actualScopes == null)
+                this._actualScopes = new Stack<IScope>();
             this._actualScopes.Push(actual);
         }
     }
@@ -47,6 +59,7 @@ namespace ManShell.BusinessObjects
         public T Type
         {
             get { return this._type; }
+            set { this._type = value;}
         }
 
         public Scope(IScope actual, T type) : base(actual)

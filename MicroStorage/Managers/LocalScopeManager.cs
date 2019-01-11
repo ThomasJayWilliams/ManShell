@@ -44,7 +44,10 @@ namespace MicroStorage
             if (type == ScopeType.Enviroment)
                 this._localScope = new Scope<ScopeType>(new LocalScope(name), type);
             else
-                this._localScope.ActualScopes.Peek().Child = new LocalScope(name, parent: (LocalScope)this._localScope.ActualScopes.Peek());
+            {
+                this._localScope.AddScope(new LocalScope(name, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.Type = type;
+            }
 
             PostScope();
         }
