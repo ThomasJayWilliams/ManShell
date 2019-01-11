@@ -67,9 +67,9 @@ namespace MicroStorage
             switch (parsedCommand)
             {
                 case "add":
-                    if (CurrentScope.Current.ScopeType == ScopeType.Enviroment)
+                    if (LocalScopeManager.Current.Scope.Type == ScopeType.Enviroment)
                         this._command = new AddCategoryCommand(this._argument);
-                    else if (CurrentScope.Current.ScopeType == ScopeType.Category)
+                    else if (LocalScopeManager.Current.Scope.Type == ScopeType.Category)
                         this._command = new AddEntryCommand(this._argument);
                     break;
                 case "scopein":

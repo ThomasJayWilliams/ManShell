@@ -30,10 +30,10 @@ namespace MicroStorage
 
         public void Invoke()
         {
-            if (!CurrentScope.Current.IsScoped || CurrentScope.Current.ScopeType != ScopeType.Category)
+            if (LocalScopeManager.Current.Scope.Type != ScopeType.Category)
                 throw new InvalidScopeException();
-            
-            string category = CurrentScope.Current.Name,
+
+            string category = LocalScopeManager.Current.Scope.Name,
                 entryName = this._argument;
 
             DataManager.AddEntry(category, entryName);

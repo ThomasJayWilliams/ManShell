@@ -30,15 +30,15 @@ namespace MicroStorage
 
         public void Invoke()
         {
-            CurrentScope current = CurrentScope.Current;
+            LocalScopeManager current = LocalScopeManager.Current;
 
-            if (((ScopeType)current.ScopeType - 1) == ScopeType.Enviroment)
+            if (((ScopeType)current.Scope.Type - 1) == ScopeType.Enviroment)
                 this._argument = Globals.AppName.ToLower();
 
-            if (DataManager.GetEntryByName(current.Name) != null)
-                this._argument = DataManager.GetCategoryByEntryName(current.Name).CategoryName;
+            if (DataManager.GetEntryByName(current.Scope.Name) != null)
+                this._argument = DataManager.GetCategoryByEntryName(current.Scope.Name).CategoryName;
 
-            current.SetScope(this._argument, (ScopeType)current.ScopeType - 1);
+            current.SetScope(this._argument, (ScopeType)current.Scope.Type - 1);
 
             this._isSuccessfull = true;
         }

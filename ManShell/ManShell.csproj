@@ -43,8 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseCommandRunner.cs" />
     <Compile Include="ConsoleWrapper.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Wrappers\IWrapper.cs" />
+    <Compile Include="Wrappers\MicroStorageWrapper.cs" />
     <Compile Include="OnStartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInterface.cs" />
@@ -54,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManShell.BusinessObjects\ManShell.BusinessObjects.csproj">
+      <Project>{db835c4f-366e-44ea-adfc-ea35dece1f24}</Project>
+      <Name>ManShell.BusinessObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MicroStorage\MicroStorage.csproj">
       <Project>{e2a8e091-6f62-4ca9-8391-cfb1053284d7}</Project>
       <Name>MicroStorage</Name>

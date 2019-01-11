@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MicroStorage;
+using ManShell.BusinessObjects;
 
 namespace ManShell
 {
@@ -41,8 +42,13 @@ namespace ManShell
 
         private static void WriteScope()
         {
-            Write(CurrentScope.Current.Name, ScopeColor);
-            Write("@", IndexColor);
+            Scope currentScope = ScopeManager.Current.GetCurrentScope();
+
+            foreach (IScope item in currentScope.ActualScopes)
+            {
+                Write(item.Name, ScopeColor);
+                Write("@", IndexColor);
+            }
             Write(": ", OutputColor);
         }
 

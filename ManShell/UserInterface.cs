@@ -5,33 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MicroStorage;
+using ManShell.BusinessObjects;
 
 namespace ManShell
 {
     internal static class UserInterface
     {
-        private static CurrentScope currentScope = CurrentScope.Current;
+        private static ScopeManager currentScope = ScopeManager.Current;
 
-        internal static void Input(string input)
-        {
-            CommandParser parser = CommandParser.Current;
-            parser.ParseCommand(input);
-            parser.OnInvoke += OnInvokeHandler;
-            parser.RunCommand();
-        }
+        public static event Execution ToExecute;
 
         internal static void Run()
         {
             while (true)
             {
                 string command = ConsoleWrapper.Read();
-                Input(command);
+                if (ToExecute != null)
+                    ToExecute.Invoke(command);
             }
-        }
-
-        private static void OnInvokeHandler(object sernder, CommandInvokeEventArgs e)
-        {
-
         }
     }
 }

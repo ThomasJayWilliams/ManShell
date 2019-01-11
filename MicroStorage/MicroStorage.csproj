@@ -49,7 +49,6 @@
     <Compile Include="Commands\AppCloseCommand.cs" />
     <Compile Include="Commands\ScopeInCommand.cs" />
     <Compile Include="Commands\UnscopeCommand.cs" />
-    <Compile Include="CurrentScope.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Enums.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Exceptions\NoCommandFoundException.cs" />
     <Compile Include="Exceptions\ScopeIsNotSetException.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="LocalScopeManager.cs" />
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="OnLoad.cs" />
@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ManShell.BusinessObjects\ManShell.BusinessObjects.csproj">
+      <Project>{db835c4f-366e-44ea-adfc-ea35dece1f24}</Project>
+      <Name>ManShell.BusinessObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

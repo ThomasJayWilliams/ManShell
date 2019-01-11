@@ -30,7 +30,7 @@ namespace MicroStorage
 
         public void Invoke()
         {
-            CurrentScope current = CurrentScope.Current;
+            LocalScopeManager current = LocalScopeManager.Current;
             string data = FileManager.GetData();
 
             ScopeType type = DataManager.Data.Categories

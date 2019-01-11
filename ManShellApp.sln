@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManShell", "ManShell\ManShe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroStorage", "MicroStorage\MicroStorage.csproj", "{E2A8E091-6F62-4CA9-8391-CFB1053284D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManShell.BusinessObjects", "ManShell.BusinessObjects\ManShell.BusinessObjects.csproj", "{DB835C4F-366E-44EA-ADFC-EA35DECE1F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E2A8E091-6F62-4CA9-8391-CFB1053284D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2A8E091-6F62-4CA9-8391-CFB1053284D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2A8E091-6F62-4CA9-8391-CFB1053284D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB835C4F-366E-44EA-ADFC-EA35DECE1F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB835C4F-366E-44EA-ADFC-EA35DECE1F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB835C4F-366E-44EA-ADFC-EA35DECE1F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB835C4F-366E-44EA-ADFC-EA35DECE1F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

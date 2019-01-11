@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
     public class OnLoad
@@ -15,7 +17,8 @@ namespace MicroStorage
             if (DataManager.Data == null)
                 Environment.Exit(1);
 
-            CurrentScope.Current.SetScope("microstorage", ScopeType.Enviroment);
+            ScopeManager.Current.SetupLocalScope(
+                new Scope(new LocalScope(Globals.AppName)));
         }
     }
 }
