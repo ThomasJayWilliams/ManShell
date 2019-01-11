@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MicroStorage
+{
+    public class CommandParser
+    {
+        private static CommandParser _instance = new CommandParser();
+        private string _argument;
+        private ICommand _command;
+
+        public event CommandInvokeHandler OnInvoke;
+
+        private CommandParser() { }
+
+        public static CommandParser Current
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new CommandParser();
+                return _instance;
+            }
+        }
+
+        public void RunCommand()
+        {
+            if (this._command == null)
+                throw new NoCommandException("No commands have been parsed to run!");
+            if (this._argument == null)
+                throw new NoCommandArgumentException("Command argument cannot be null!");
+
+            this._command.Invoke();
+
+            if (this.OnInvoke != null)
+                this.OnInvoke.Invoke(this, new CommandInvokeEventArgs("Command has been invoked!"));
+        }
+
+        public void ParseCommand(string command)
+        {
+            this._command = null;
+            this._argument = null;
+
+            if (string.IsNullOrEmpty(command))
+                throw new ArgumentNullException("command");
+
+            string arg = string.Empty,
+                parsedCommand = string.Empty;
+            int splitterIndex = command.IndexOf(" ", 0);
+
+            if (splitterIndex > 0)
+            {
+                parsedCommand = command.Substring(0, splitterIndex).ToLower();
+                arg = command.Substring(splitterIndex + 1);
+            }
+            else
+                parsedCommand = command.Substring(0);
+
+            if (string.IsNullOrEmpty(parsedCommand))
+                throw new InvalidCommandException("Command is invalid and cannot be casted!");
+
+            this._argument = arg;
+
+            switch (parsedCommand)
+            {
+                case "add":
+                    if (CurrentScope.Current.ScopeType == ScopeType.Enviroment)
+                        this._command = new AddCategoryCommand(this._argument);
+                    else if (CurrentScope.Current.ScopeType == ScopeType.Category)
+                        this._command = new AddEntryCommand(this._argument);
+                    break;
+                case "scopein":
+                    this._command = new ScopeInCommand(this._argument);
+                    break;
+                case "unscope":
+                    this._command = new UnscopeCommand(this._argument);
+                    break;
+                case "quit":
+                case "exit":
+                    this._command = new AppCloseCommand(this._argument);
+                    break;
+                default:
+                    throw new InvalidCommandException("Invalid command!");
+            }
+        }
+    }
+}
