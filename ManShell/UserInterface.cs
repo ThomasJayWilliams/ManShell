@@ -13,15 +13,15 @@ namespace ManShell
     {
         private static ScopeManager currentScope = ScopeManager.Current;
 
-        public static event Execution ToExecute;
+        public static Execution ToInvoke;
 
         internal static void Run()
         {
             while (true)
             {
                 string command = ConsoleWrapper.Read();
-                if (ToExecute != null)
-                    ToExecute.Invoke(command);
+                if (ToInvoke != null)
+                    ToInvoke.Invoke(command);
             }
         }
     }

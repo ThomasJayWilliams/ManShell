@@ -26,7 +26,7 @@ namespace MicroStorage
             }
         }
 
-        public void RunCommand()
+        private void RunCommand()
         {
             if (this._command == null)
                 throw new NoCommandException("No commands have been parsed to run!");
@@ -85,6 +85,8 @@ namespace MicroStorage
                 default:
                     throw new InvalidCommandException("Invalid command!");
             }
+
+            RunCommand();
         }
     }
 }

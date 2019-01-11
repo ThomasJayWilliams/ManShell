@@ -10,7 +10,7 @@ namespace ManShell
     {
         public static void Load()
         {
-            UserInterface.ToExecute += BaseCommandRunner.RunApp;
+            UserInterface.ToInvoke = BaseCommandRunner.RunApp;
 
             ConsoleWrapper.Setup();
         }

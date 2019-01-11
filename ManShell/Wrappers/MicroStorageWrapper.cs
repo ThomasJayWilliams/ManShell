@@ -14,9 +14,7 @@ namespace ManShell
         {
             MicroStorage.OnLoad.Load();
 
-            UserInterface.ToExecute += CommandParser.Current.ParseCommand;
-
-            CommandParser.Current.RunCommand();
+            UserInterface.ToInvoke = CommandParser.Current.ParseCommand;
         }
     }
 }

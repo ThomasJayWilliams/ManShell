@@ -17,8 +17,7 @@ namespace MicroStorage
             if (DataManager.Data == null)
                 Environment.Exit(1);
 
-            ScopeManager.Current.SetupLocalScope(
-                new Scope(new LocalScope(Globals.AppName)));
+            LocalScopeManager.Current.SetScope(Globals.AppName.ToLower(), ScopeType.Enviroment);
         }
     }
 }
