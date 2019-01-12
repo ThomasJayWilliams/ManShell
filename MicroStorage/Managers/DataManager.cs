@@ -71,6 +71,18 @@ namespace MicroStorage
             _data.Categories = tempList.ToArray<Category>();
         }
 
+        public static void AddContent(string entryName, string content)
+        {
+            if (string.IsNullOrEmpty(entryName) || string.IsNullOrEmpty(content))
+                throw new ArgumentNullException();
+
+            if (!IsElementExist(entryName))
+                throw new EntryNotFoundException();
+
+            Entry entry = GetEntryByName(entryName);
+            entry.EntryData = content;
+        }
+
         public static void AddEntry(string categoryName, string entryName)
         {
             if (string.IsNullOrEmpty(categoryName) || string.IsNullOrEmpty(entryName))
@@ -78,6 +90,9 @@ namespace MicroStorage
 
             if (IsElementExist(entryName))
                 throw new DuplicateInsertingException();
+
+            if (!IsElementExist(categoryName))
+                throw new CategoryNotFoundException();
 
             Entry entry = new Entry()
             {

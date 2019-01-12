@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class UnscopeCommand : ICommand
+    public class AddContentCommand : ICommand
     {
         private bool _isSuccessfull;
         private string _argument;
@@ -21,7 +21,7 @@ namespace MicroStorage
             get { return this._argument; }
         }
 
-        public UnscopeCommand(string arg)
+        public AddContentCommand(string arg)
         {
             if (arg == null)
                 throw new ArgumentNullException("arg", "Argument cannot be null or empty!");
@@ -30,15 +30,15 @@ namespace MicroStorage
 
         public void Invoke()
         {
-            LocalScopeManager current = LocalScopeManager.Current;
+            if (LocalScopeManager.Current.Scope.Type != ScopeType.Entry)
+                throw new InvalidScopeException();
 
-            if (((ScopeType)current.Scope.Type - 1) == ScopeType.Enviroment)
-                this._argument = Globals.AppName.ToLower();
+            string entry = LocalScopeManager.Current.Scope.Name,
+                content = this._argument;
 
-            if (DataManager.GetEntryByName(current.Scope.Name) != null)
-                this._argument = DataManager.GetCategoryByEntryName(current.Scope.Name).CategoryName;
-
-            current.Unscope();
+            DataManager.AddContent(entry, content);
+            DataManager.ParseToJSON();
+            FileManager.Save(DataManager.JSON);
 
             this._isSuccessfull = true;
         }

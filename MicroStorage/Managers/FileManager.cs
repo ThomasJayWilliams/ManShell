@@ -10,8 +10,9 @@ namespace MicroStorage
     public static class FileManager
     {
         private static string _localPath = Environment.CurrentDirectory;
+        private static string _dirName = "data";
         private static string _fileName = "storage.dat";
-        private static string _fullFileName = _localPath + "\\" + _fileName;
+        private static string _fullFileName = _localPath + "\\" + _dirName + "\\" + _fileName;
 
         public static void Save(string arg)
         {
@@ -28,6 +29,7 @@ namespace MicroStorage
 
             if (!File.Exists(_fullFileName))
             {
+                Directory.CreateDirectory(_dirName);
                 FileStream file = File.Create(_fullFileName);
                 file.Close();
             }

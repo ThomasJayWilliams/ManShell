@@ -71,6 +71,8 @@ namespace MicroStorage
                         this._command = new AddCategoryCommand(this._argument);
                     else if (LocalScopeManager.Current.Scope.Type == ScopeType.Category)
                         this._command = new AddEntryCommand(this._argument);
+                    else if (LocalScopeManager.Current.Scope.Type == ScopeType.Entry)
+                        this._command = new AddContentCommand(this._argument);
                     break;
                 case "scopein":
                     this._command = new ScopeInCommand(this._argument);

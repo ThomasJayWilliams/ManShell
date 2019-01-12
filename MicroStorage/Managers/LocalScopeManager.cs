@@ -52,6 +52,16 @@ namespace MicroStorage
             PostScope();
         }
 
+        public void Unscope()
+        {
+            if (this._localScope == null)
+                throw new InvalidScopeException();
+
+            this._localScope.ActualScopes.Pop();
+
+            PostScope();
+        }
+
         private void PostScope()
         {
             if (this._localScope != null)
