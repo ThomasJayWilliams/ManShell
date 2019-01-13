@@ -10,7 +10,7 @@ namespace MicroStorage
     {
         private static CommandParser _instance = new CommandParser();
         private string _argument;
-        private ICommand _command;
+        private CommandBase _command;
 
         public event CommandInvokeHandler OnInvoke;
 
@@ -74,11 +74,15 @@ namespace MicroStorage
                     else if (LocalScopeManager.Current.Scope.Type == ScopeType.Entry)
                         this._command = new AddContentCommand(this._argument);
                     break;
+                case "show":
+                    if (LocalScopeManager.Current.Scope.Type == ScopeType.Entry)
+                        this._command = new ShowContentCommand();
+                    break;
                 case "scopein":
                     this._command = new ScopeInCommand(this._argument);
                     break;
                 case "unscope":
-                    this._command = new UnscopeCommand(this._argument);
+                    this._command = new UnscopeCommand();
                     break;
                 case "quit":
                 case "exit":

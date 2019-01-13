@@ -6,21 +6,8 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class AddCategoryCommand : ICommand
+    public class AddCategoryCommand : CommandBase
     {
-        private bool _isSuccessfull;
-        private string _argument;
-
-        public bool IsSuccessfull
-        {
-            get { return this._isSuccessfull; }
-        }
-
-        public string Argument
-        {
-            get { return this._argument; }
-        }
-
         public AddCategoryCommand(string arg)
         {
             if (arg == null)
@@ -28,7 +15,7 @@ namespace MicroStorage
             this._argument = arg;
         }
 
-        public void Invoke()
+        public override void Invoke()
         {
             if (LocalScopeManager.Current.Scope.Type != ScopeType.Enviroment)
                 throw new InvalidScopeException();

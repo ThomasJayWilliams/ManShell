@@ -6,21 +6,8 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class AppCloseCommand : ICommand
+    public class AppCloseCommand : CommandBase
     {
-        private bool _isSuccessfull;
-        private string _argument;
-
-        public bool IsSuccessfull
-        {
-            get { return this._isSuccessfull; }
-        }
-
-        public string Argument
-        {
-            get { return this._argument; }
-        }
-
         public AppCloseCommand(string arg)
         {
             if (arg == null)
@@ -28,7 +15,7 @@ namespace MicroStorage
             this._argument = arg;
         }
 
-        public void Invoke()
+        public override void Invoke()
         {
             DataManager.ParseToJSON();
             FileManager.Save(DataManager.JSON);

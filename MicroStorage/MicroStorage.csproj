@@ -49,9 +49,10 @@
     <Compile Include="Commands\AddEntryCommand.cs" />
     <Compile Include="Commands\AppCloseCommand.cs" />
     <Compile Include="Commands\ScopeInCommand.cs" />
+    <Compile Include="Commands\ShowContentCommand.cs" />
     <Compile Include="Commands\UnscopeCommand.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventArgs\CommandInvokeEventArgs.cs" />
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />

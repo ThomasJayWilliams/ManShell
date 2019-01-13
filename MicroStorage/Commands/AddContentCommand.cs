@@ -6,21 +6,8 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class AddContentCommand : ICommand
+    public class AddContentCommand : CommandBase
     {
-        private bool _isSuccessfull;
-        private string _argument;
-
-        public bool IsSuccessfull
-        {
-            get { return this._isSuccessfull; }
-        }
-
-        public string Argument
-        {
-            get { return this._argument; }
-        }
-
         public AddContentCommand(string arg)
         {
             if (arg == null)
@@ -28,15 +15,14 @@ namespace MicroStorage
             this._argument = arg;
         }
 
-        public void Invoke()
+        public override void Invoke()
         {
             if (LocalScopeManager.Current.Scope.Type != ScopeType.Entry)
                 throw new InvalidScopeException();
 
-            string entry = LocalScopeManager.Current.Scope.Name,
-                content = this._argument;
+            string entry = LocalScopeManager.Current.Scope.Name;
 
-            DataManager.AddContent(entry, content);
+            DataManager.AddContent(entry, _argument);
             DataManager.ParseToJSON();
             FileManager.Save(DataManager.JSON);
 

@@ -80,7 +80,10 @@ namespace MicroStorage
                 throw new EntryNotFoundException();
 
             Entry entry = GetEntryByName(entryName);
-            entry.EntryData = content;
+            content = DateTime.UtcNow.ToString() + Globals.TabLiteral + content;
+            if (!string.IsNullOrEmpty(entry.EntryData))
+                content = Globals.NewLineLiteral + content;
+            entry.EntryData += content;
         }
 
         public static void AddEntry(string categoryName, string entryName)

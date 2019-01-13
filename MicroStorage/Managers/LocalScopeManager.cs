@@ -28,10 +28,7 @@ namespace MicroStorage
             get { return this._localScope; }
         }
 
-        private LocalScopeManager()
-        {
-            
-        }
+        private LocalScopeManager() { }
 
         public void SetScope(string name, ScopeType type)
         {
@@ -42,10 +39,20 @@ namespace MicroStorage
                 throw new InvalidScopeException();
 
             if (type == ScopeType.Enviroment)
-                this._localScope = new Scope<ScopeType>(new LocalScope(name), type);
-            else
+                this._localScope = new Scope<ScopeType>(new LocalScope(name, type), type);
+            else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Category)
             {
-                this._localScope.AddScope(new LocalScope(name, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.Type = type;
+            }
+            else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Entry)
+            {
+                Category category = DataManager.GetCategoryByEntryName(name);
+                if (category == null)
+                    throw new InvalidScopeException();
+
+                this._localScope.AddScope(new LocalScope(type: type, name: category.CategoryName, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
                 this._localScope.Type = type;
             }
 
@@ -57,7 +64,9 @@ namespace MicroStorage
             if (this._localScope == null)
                 throw new InvalidScopeException();
 
-            this._localScope.ActualScopes.Pop();
+            LocalScope parent = (LocalScope)this._localScope.ActualScopes.Pop().Parent;
+            if (parent != null)
+                this._localScope.Type = parent.Type;
 
             PostScope();
         }
@@ -74,6 +83,7 @@ namespace MicroStorage
         private string _name;
         private IScope _child;
         private IScope _parent;
+        private ScopeType _type;
 
         public string Name
         {
@@ -90,14 +100,20 @@ namespace MicroStorage
             get { return this._child; }
             set { this._child = value; }
         }
+        public ScopeType Type
+        {
+            get { return this._type; }
+            set { this._type = value; }
+        }
 
-        public LocalScope(string name, LocalScope parent = null, LocalScope child = null)
+        public LocalScope(string name, ScopeType type, LocalScope parent = null, LocalScope child = null)
         {
             this._name = name;
             if (parent != null)
                 this._parent = parent;
             if (child != null)
                 this._child = child;
+            this._type = type;
         }
     }
 }

@@ -6,37 +6,11 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class UnscopeCommand : ICommand
+    public class UnscopeCommand : CommandBase
     {
-        private bool _isSuccessfull;
-        private string _argument;
-
-        public bool IsSuccessfull
-        {
-            get { return this._isSuccessfull; }
-        }
-
-        public string Argument
-        {
-            get { return this._argument; }
-        }
-
-        public UnscopeCommand(string arg)
-        {
-            if (arg == null)
-                throw new ArgumentNullException("arg", "Argument cannot be null or empty!");
-            this._argument = arg;
-        }
-
-        public void Invoke()
+        public override void Invoke()
         {
             LocalScopeManager current = LocalScopeManager.Current;
-
-            if (((ScopeType)current.Scope.Type - 1) == ScopeType.Enviroment)
-                this._argument = Globals.AppName.ToLower();
-
-            if (DataManager.GetEntryByName(current.Scope.Name) != null)
-                this._argument = DataManager.GetCategoryByEntryName(current.Scope.Name).CategoryName;
 
             current.Unscope();
 
