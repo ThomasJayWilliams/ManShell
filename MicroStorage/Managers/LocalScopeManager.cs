@@ -42,7 +42,7 @@ namespace MicroStorage
                 this._localScope = new Scope<ScopeType>(new LocalScope(name, type), type);
             else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Category)
             {
-                this._localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
             }
             else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Entry)
             {
@@ -50,8 +50,12 @@ namespace MicroStorage
                 if (category == null)
                     throw new InvalidScopeException();
 
-                this._localScope.AddScope(new LocalScope(type: type, name: category.CategoryName, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
-                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
+                this._localScope.AddScope(new LocalScope(type: (ScopeType)type - 1, name: category.CategoryName, parent: (LocalScope)this._localScope.ActualScopes.Peek()), (ScopeType)type - 1);
+                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
+            }
+            else if (this._localScope.Type == ScopeType.Category && type == ScopeType.Entry)
+            {
+                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
             }
 
             PostScope();
@@ -64,7 +68,7 @@ namespace MicroStorage
 
             ScopeType type = ScopeType.Enviroment;
             if (this._localScope.Type > ScopeType.Enviroment)
-                type = (ScopeType)this._localScope.Type + 1;
+                type = (ScopeType)this._localScope.Type - 1;
 
             this._localScope.RemoveScope(type);
 
@@ -104,6 +108,10 @@ namespace MicroStorage
         {
             get { return this._type; }
             set { this._type = value; }
+        }
+        public string TypeName
+        {
+            get { return this._type.ToString(); }
         }
 
         public LocalScope(string name, ScopeType type, LocalScope parent = null, LocalScope child = null)

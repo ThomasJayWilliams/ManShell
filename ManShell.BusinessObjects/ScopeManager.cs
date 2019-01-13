@@ -58,5 +58,6 @@ namespace ManShell.BusinessObjects
         }
         public IScope Parent { get { return null; } set { } }
         public IScope Child { get { return null; } set { } }
+        public string TypeName { get { return Globals.GeneralAppName; } }
     }
 }

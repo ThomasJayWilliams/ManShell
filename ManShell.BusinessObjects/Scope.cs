@@ -10,6 +10,7 @@ namespace ManShell.BusinessObjects
     public interface IScope
     {
         string Name { get; set; }
+        string TypeName { get; }
         IScope Parent { get; set; }
         IScope Child { get; set; }
     }
@@ -81,7 +82,6 @@ namespace ManShell.BusinessObjects
         public void AddScope(IScope scope, T type)
         {
             this._type = type;
-
             base.AddScope(scope);
         }
 

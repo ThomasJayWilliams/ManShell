@@ -11,10 +11,12 @@ namespace ManShell
 {
     internal static class ConsoleWrapper
     {
-        internal static ConsoleColor ScopeColor = ConsoleColor.DarkYellow;
+        internal static ConsoleColor ScopeColor = ConsoleColor.Yellow;
         internal static ConsoleColor OutputColor = ConsoleColor.Gray;
-        internal static ConsoleColor InputColor = ConsoleColor.DarkGreen;
-        internal static ConsoleColor IndexColor = ConsoleColor.DarkCyan;
+        internal static ConsoleColor InputColor = ConsoleColor.Gray;
+        internal static ConsoleColor SplitterColor = ConsoleColor.Magenta;
+        internal static ConsoleColor ElementNameColor = ConsoleColor.Cyan;
+        internal static ConsoleColor PointerColor = ConsoleColor.Green;
 
         internal static void Setup()
         {
@@ -37,6 +39,8 @@ namespace ManShell
             if (result == null)
                 result = string.Empty;
 
+            WriteLine(" ");
+
             return result;
         }
 
@@ -44,6 +48,7 @@ namespace ManShell
         {
             Scope currentScope = ScopeManager.Current.GetCurrentScope();
             Stack<IScope> tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
+            string typeName = string.Empty;
 
             for (int i = 0; i < currentScope.ActualScopes.Count; i++)
             {
@@ -51,10 +56,20 @@ namespace ManShell
                 if (scope != null)
                 {
                     Write(scope.Name, ScopeColor);
-                    Write("@", IndexColor);
+
+                    if (i == currentScope.ActualScopes.Count - 1 && !string.IsNullOrEmpty(scope.TypeName))
+                    {
+                        typeName = "(" + scope.TypeName.ToLower() + ")";
+                            Write(typeName, ElementNameColor);
+                    }
+
+                    else if (i < currentScope.ActualScopes.Count - 1)
+                        Write("/", SplitterColor);
                 }
             }
-            Write(": ", OutputColor);
+
+            Write(" ~", PointerColor);
+            Write("\n$ ", OutputColor);
         }
 
         internal static void Write(string arg)
