@@ -41,6 +41,16 @@ namespace ManShell.BusinessObjects
             this._name = scope.Name;
         }
 
+        public void RemoveScope()
+        {
+            if (this._actualScopes.Count > 1)
+            {
+                IScope current = this._actualScopes.Pop();
+                if (current != null && current.Parent != null)
+                    this._name = current.Parent.Name;
+            }
+        }
+
         public Scope(IScope actual)
         {
             if (actual == null)
@@ -61,12 +71,24 @@ namespace ManShell.BusinessObjects
         public T Type
         {
             get { return this._type; }
-            set { this._type = value;}
         }
 
         public Scope(IScope actual, T type) : base(actual)
         {
             this._type = type;
+        }
+
+        public void AddScope(IScope scope, T type)
+        {
+            this._type = type;
+
+            base.AddScope(scope);
+        }
+
+        public void RemoveScope(T type)
+        {
+            this._type = type;
+            base.RemoveScope();
         }
     }
 }

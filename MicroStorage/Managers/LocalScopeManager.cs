@@ -43,7 +43,6 @@ namespace MicroStorage
             else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Category)
             {
                 this._localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
-                this._localScope.Type = type;
             }
             else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Entry)
             {
@@ -53,7 +52,6 @@ namespace MicroStorage
 
                 this._localScope.AddScope(new LocalScope(type: type, name: category.CategoryName, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
                 this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()));
-                this._localScope.Type = type;
             }
 
             PostScope();
@@ -64,9 +62,11 @@ namespace MicroStorage
             if (this._localScope == null)
                 throw new InvalidScopeException();
 
-            LocalScope parent = (LocalScope)this._localScope.ActualScopes.Pop().Parent;
-            if (parent != null)
-                this._localScope.Type = parent.Type;
+            ScopeType type = ScopeType.Enviroment;
+            if (this._localScope.Type > ScopeType.Enviroment)
+                type = (ScopeType)this._localScope.Type + 1;
+
+            this._localScope.RemoveScope(type);
 
             PostScope();
         }
