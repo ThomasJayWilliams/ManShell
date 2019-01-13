@@ -44,9 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandParser.cs" />
-    <Compile Include="Commands\AddCategoryCommand.cs" />
-    <Compile Include="Commands\AddContentCommand.cs" />
-    <Compile Include="Commands\AddEntryCommand.cs" />
+    <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\AppCloseCommand.cs" />
     <Compile Include="Commands\ScopeInCommand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />

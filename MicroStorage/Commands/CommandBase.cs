@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public abstract class CommandBase
+    internal abstract class CommandBase
     {
         protected bool _isSuccessfull;
         protected string _argument;
 
-        public bool IsSuccessfull
+        internal bool IsSuccessfull
         {
             get { return this._isSuccessfull; }
         }
 
-        public string Argument
+        internal string Argument
         {
             get { return this._argument; }
         }
 
-        public abstract void Invoke();
+        internal abstract void Invoke();
     }
 }

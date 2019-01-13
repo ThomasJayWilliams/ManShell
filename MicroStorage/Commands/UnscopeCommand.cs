@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class UnscopeCommand : CommandBase
+    internal class UnscopeCommand : CommandBase
     {
-        public override void Invoke()
+        internal override void Invoke()
         {
             LocalScopeManager current = LocalScopeManager.Current;
 

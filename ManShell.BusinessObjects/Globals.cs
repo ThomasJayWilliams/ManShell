@@ -14,6 +14,7 @@ namespace ManShell.BusinessObjects
         
         // Static members
         private static string _toOutput = string.Empty;
+        private static List<string> _listToOutput = new List<string>();
 
         public static string ToOutput
         {
@@ -27,6 +28,21 @@ namespace ManShell.BusinessObjects
             {
                 if (value != null)
                     _toOutput = value;
+            }
+        }
+
+        public static List<string> ListToOutput
+        {
+            get
+            {
+                if (_listToOutput == null)
+                    _listToOutput = new List<string>();
+                return _listToOutput;
+            }
+            set
+            {
+                if (value != null)
+                    _listToOutput = value;
             }
         }
     }

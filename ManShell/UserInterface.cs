@@ -23,8 +23,21 @@ namespace ManShell
                     ToInvoke.Invoke(command);
 
                 if (!string.IsNullOrEmpty(Globals.ToOutput))
+                {
+                    ConsoleWrapper.WriteLine(" ");
                     ConsoleWrapper.WriteLine(Globals.ToOutput);
-                Globals.ToOutput = string.Empty;
+                    Globals.ToOutput = string.Empty;
+                }
+
+                if (Globals.ListToOutput.Count > 0)
+                {
+                    ConsoleWrapper.WriteLine(" ");
+                    foreach (string item in Globals.ListToOutput)
+                        ConsoleWrapper.WriteLine(item);
+                    Globals.ListToOutput = new List<string>();
+                }
+
+                ConsoleWrapper.WriteLine(" ");
             }
         }
     }

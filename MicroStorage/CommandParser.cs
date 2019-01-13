@@ -67,16 +67,10 @@ namespace MicroStorage
             switch (parsedCommand)
             {
                 case "add":
-                    if (LocalScopeManager.Current.Scope.Type == ScopeType.Enviroment)
-                        this._command = new AddCategoryCommand(this._argument);
-                    else if (LocalScopeManager.Current.Scope.Type == ScopeType.Category)
-                        this._command = new AddEntryCommand(this._argument);
-                    else if (LocalScopeManager.Current.Scope.Type == ScopeType.Entry)
-                        this._command = new AddContentCommand(this._argument);
+                    this._command = new AddCommand(this._argument);
                     break;
                 case "show":
-                    if (LocalScopeManager.Current.Scope.Type == ScopeType.Entry)
-                        this._command = new ShowContentCommand();
+                    this._command = new ShowContentCommand();
                     break;
                 case "scopein":
                     this._command = new ScopeInCommand(this._argument);
@@ -86,7 +80,7 @@ namespace MicroStorage
                     break;
                 case "quit":
                 case "exit":
-                    this._command = new AppCloseCommand(this._argument);
+                    this._command = new AppCloseCommand();
                     break;
                 default:
                     throw new InvalidCommandException("Invalid command!");

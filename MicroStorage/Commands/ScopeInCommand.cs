@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MicroStorage
 {
-    public class ScopeInCommand : CommandBase
+    internal class ScopeInCommand : CommandBase
     {
-        public ScopeInCommand(string arg)
+        internal ScopeInCommand(string arg)
         {
             if (arg == null)
                 throw new ArgumentNullException("arg", "Argument cannot be null or empty!");
             this._argument = arg;
         }
 
-        public override void Invoke()
+        internal override void Invoke()
         {
             ScopeType type = ScopeType.Enviroment;
 
