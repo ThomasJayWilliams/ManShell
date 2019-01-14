@@ -10,6 +10,9 @@ namespace MicroStorage
     {
         internal DeleteCommand(string argument)
         {
+            if (string.IsNullOrEmpty(argument))
+                throw new ArgumentNullException("argument", "Argument is required for this command!");
+
             this._argument = argument;
         }
 
@@ -38,6 +41,9 @@ namespace MicroStorage
                         DataManager.Data.Categories = cats.ToArray<Category>();
                     }
                 }
+
+                else
+                    throw new CategoryNotFoundException("No categories found! Use 'add' command to add new category.");
             }
 
             else if (type == ScopeType.Category)
@@ -46,23 +52,26 @@ namespace MicroStorage
                 {
                     Category cat = DataManager.GetCategoryByName(LocalScopeManager.Current.Scope.Name);
 
-                    if (cat != null)
+                    if (this._argument == "all")
+                        cat.Items = new Entry[0];
+
+                    else if (cat.Items != null && cat.Items.Length > 0)
                     {
-                        if (this._argument == "all")
-                            cat.Items = new Entry[0];
+                        List<Entry> entries = cat.Items.ToList<Entry>();
+                        Entry entry = DataManager.GetEntryByName(this._argument);
+
+                        if (entry != null)
+                            entries.Remove(entry);
 
                         else
-                        {
-                            List<Entry> entries = cat.Items.ToList<Entry>();
-                            Entry entry = DataManager.GetEntryByName(this._argument);
+                            throw new EntryNotFoundException();
 
-                            if (entry != null)
-                                entries.Remove(entry);
-
-                            cat.Items = entries.ToArray<Entry>();
-                        }
+                        cat.Items = entries.ToArray<Entry>();
                     }
                 }
+
+                else
+                    throw new CategoryNotFoundException();
             }
 
             else if (type == ScopeType.Entry)
@@ -71,6 +80,9 @@ namespace MicroStorage
 
                 if (entry != null && string.IsNullOrEmpty(this._argument))
                     entry.EntryData = string.Empty;
+
+                else
+                    throw new EntryNotFoundException("Error occured while deleting entry content!");
             }
 
             DataManager.ParseToJSON();

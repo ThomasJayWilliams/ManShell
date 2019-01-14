@@ -25,7 +25,13 @@ namespace MicroStorage
 
         public Scope<ScopeType> Scope
         {
-            get { return this._localScope; }
+            get
+            {
+                if (this._localScope == null)
+                    this._localScope = new Scope<ScopeType>(
+                        new LocalScope(Globals.AppName, ScopeType.Enviroment), ScopeType.Enviroment);
+                return this._localScope;
+            }
         }
 
         private LocalScopeManager() { }
@@ -64,7 +70,7 @@ namespace MicroStorage
         public void Unscope()
         {
             if (this._localScope == null)
-                throw new InvalidScopeException();
+                throw new InvalidScopeException("Critical error occured! Scope is not set!");
 
             ScopeType type = ScopeType.Enviroment;
             if (this._localScope.Type > ScopeType.Enviroment)

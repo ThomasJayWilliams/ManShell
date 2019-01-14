@@ -20,7 +20,16 @@ namespace ManShell
             {
                 string command = ConsoleWrapper.Read();
                 if (ToInvoke != null)
-                    ToInvoke.Invoke(command);
+                {
+                    try
+                    {
+                        ToInvoke.Invoke(command);
+                    }
+                    catch (Exception ex)
+                    {
+                        ConsoleWrapper.ShowError(ex.Message);
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(Globals.ToOutput))
                 {

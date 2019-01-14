@@ -11,7 +11,7 @@ namespace MicroStorage
         internal ScopeInCommand(string arg)
         {
             if (arg == null)
-                throw new ArgumentNullException("arg", "Argument cannot be null or empty!");
+                throw new ArgumentNullException("arg", "Argument is required for this command!");
             this._argument = arg;
         }
 
@@ -20,7 +20,7 @@ namespace MicroStorage
             ScopeType type = ScopeType.Enviroment;
 
             if (!DataManager.GetTypeByName(this._argument, ref type))
-                throw new InvalidScopeException();
+                throw new InvalidScopeException("Object to scope is not found!");
 
             LocalScopeManager.Current.SetScope(this._argument, type);
 

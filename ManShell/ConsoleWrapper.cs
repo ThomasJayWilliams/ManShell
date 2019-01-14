@@ -17,11 +17,18 @@ namespace ManShell
         internal static ConsoleColor SplitterColor = ConsoleColor.Yellow;
         internal static ConsoleColor ElementNameColor = ConsoleColor.Cyan;
         internal static ConsoleColor PointerColor = ConsoleColor.Green;
+        internal static ConsoleColor ErrorColor = ConsoleColor.Red;
 
         internal static void Setup()
         {
             Console.ResetColor();
             Console.Clear();
+        }
+
+        internal static void ShowError(string errorText)
+        {
+            if (!string.IsNullOrEmpty(errorText))
+                WriteLine(errorText, ErrorColor);
         }
 
         internal static string Read()

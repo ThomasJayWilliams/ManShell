@@ -21,8 +21,6 @@ namespace MicroStorage
                 case ScopeType.Entry:
                     this.ShowContent();
                     break;
-                default:
-                    throw new InvalidScopeException();
             }
 
             this._isSuccessfull = true;
@@ -30,10 +28,13 @@ namespace MicroStorage
 
         private void ShowEntries()
         {
-            Entry[] eList = DataManager.GetCategoryByName(LocalScopeManager.Current.Scope.Name).Items;
+            Category temp = DataManager.GetCategoryByName(LocalScopeManager.Current.Scope.Name);
+            Entry[] eList;
 
-            if (eList == null || eList.Length == 0)
-                throw new EntryNotFoundException();
+            if (temp != null && temp.Items != null && temp.Items.Length > 0)
+                eList = temp.Items;
+            else
+                throw new EntryNotFoundException("No entries have been found!");
 
             List<string> strList = new List<string>();
             foreach (Entry item in eList)
@@ -48,7 +49,7 @@ namespace MicroStorage
             Category[] catList = DataManager.Data.Categories;
 
             if (catList == null || catList.Length == 0)
-                throw new CategoryNotFoundException();
+                throw new CategoryNotFoundException("No categories have been found!");
 
             List<string> strList = new List<string>();
             foreach (Category item in catList)
@@ -61,10 +62,16 @@ namespace MicroStorage
         private void ShowContent()
         {
             string entryName = LocalScopeManager.Current.Scope.Name;
+
+            if (string.IsNullOrEmpty(entryName))
+                throw new InvalidCommandException("Error occured while showing content for specified entry!");
+
             Entry entry = DataManager.GetEntryByName(entryName);
 
-            if (entry != null)
-                ManShell.BusinessObjects.Globals.ToOutput = entry.EntryData;
+            if (entry == null)
+                throw new InvalidCommandException("Error occured while showing content for specified entry!");
+
+            ManShell.BusinessObjects.Globals.ToOutput = entry.EntryData;
         }
     }
 }

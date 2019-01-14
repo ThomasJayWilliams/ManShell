@@ -27,7 +27,12 @@ namespace ManShell.BusinessObjects
 
         public Stack<IScope> ActualScopes
         {
-            get { return this._actualScopes; }
+            get
+            {
+                if (this._actualScopes == null)
+                    this._actualScopes = new Stack<IScope>();
+                return this._actualScopes;
+            }
         }
 
         public void AddScope(IScope scope)

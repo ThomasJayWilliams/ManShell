@@ -11,7 +11,7 @@ namespace MicroStorage
         internal AddCommand(string argument)
         {
             if (string.IsNullOrEmpty(argument))
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("argument", "Argument required for this command!");
 
             this._argument = argument;
         }
