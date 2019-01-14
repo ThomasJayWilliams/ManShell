@@ -78,6 +78,9 @@ namespace MicroStorage
                 case "unscope":
                     this._command = new UnscopeCommand();
                     break;
+                case "delete":
+                    this._command = new DeleteCommand(this._argument);
+                    break;
                 case "quit":
                 case "exit":
                     this._command = new AppCloseCommand();
