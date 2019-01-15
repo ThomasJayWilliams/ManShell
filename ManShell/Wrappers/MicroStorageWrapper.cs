@@ -14,14 +14,7 @@ namespace ManShell
 
         public void RunApplication(string command)
         {
-            try
-            {
-                Application.Current.RunCommand(command);
-            }
-            catch (Exception ex)
-            {
-                ConsoleWrapper.ShowError(ex.Message);
-            }
+            Application.Current.RunCommand(command);
         }
     }
 }

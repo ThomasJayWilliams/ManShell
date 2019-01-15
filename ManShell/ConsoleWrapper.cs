@@ -74,6 +74,11 @@ namespace ManShell
                 Console.Write(arg);
         }
 
+        internal static void WriteEmptyLine()
+        {
+            Console.WriteLine(" ");
+        }
+
         internal static void WriteLine(string arg)
         {
             if (!string.IsNullOrEmpty(arg))
