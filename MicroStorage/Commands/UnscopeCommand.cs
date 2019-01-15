@@ -4,11 +4,9 @@
     {
         internal override void Invoke()
         {
-            LocalScopeManager current = LocalScopeManager.Current;
+            LocalScopeManager.Current.Unscope();
 
-            current.Unscope();
-
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
         }
     }
 }

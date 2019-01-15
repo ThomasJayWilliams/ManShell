@@ -13,21 +13,21 @@ namespace ManShell.BusinessObjects
 
     public class Scope
     {
-        protected string _name;
-        protected Stack<IScope> _actualScopes;
+        protected string name;
+        protected Stack<IScope> actualScopes;
 
         public string Name
         {
-            get { return this._name; }
+            get { return this.name; }
         }
 
         public Stack<IScope> ActualScopes
         {
             get
             {
-                if (this._actualScopes == null)
-                    this._actualScopes = new Stack<IScope>();
-                return this._actualScopes;
+                if (this.actualScopes == null)
+                    this.actualScopes = new Stack<IScope>();
+                return this.actualScopes;
             }
         }
 
@@ -36,20 +36,20 @@ namespace ManShell.BusinessObjects
             if (scope == null)
                 throw new ArgumentNullException();
 
-            if (this._actualScopes.Count > 0)
-                this._actualScopes.Peek().Child = scope;
-            this._actualScopes.Push(scope);
+            if (this.actualScopes.Count > 0)
+                this.actualScopes.Peek().Child = scope;
+            this.actualScopes.Push(scope);
 
-            this._name = scope.Name;
+            this.name = scope.Name;
         }
 
         public void RemoveScope()
         {
-            if (this._actualScopes.Count > 1)
+            if (this.actualScopes.Count > 1)
             {
-                IScope current = this._actualScopes.Pop();
+                IScope current = this.actualScopes.Pop();
                 if (current != null && current.Parent != null)
-                    this._name = current.Parent.Name;
+                    this.name = current.Parent.Name;
             }
         }
 
@@ -58,37 +58,37 @@ namespace ManShell.BusinessObjects
             if (actual == null)
                 throw new ArgumentNullException();
 
-            this._name = actual.Name;
+            this.name = actual.Name;
 
-            if (this._actualScopes == null)
-                this._actualScopes = new Stack<IScope>();
-            this._actualScopes.Push(actual);
+            if (this.actualScopes == null)
+                this.actualScopes = new Stack<IScope>();
+            this.actualScopes.Push(actual);
         }
     }
 
     public class Scope<T> : Scope where T : struct
     {
-        protected T _type;
+        protected T type;
 
         public T Type
         {
-            get { return this._type; }
+            get { return this.type; }
         }
 
         public Scope(IScope actual, T type) : base(actual)
         {
-            this._type = type;
+            this.type = type;
         }
 
         public void AddScope(IScope scope, T type)
         {
-            this._type = type;
+            this.type = type;
             base.AddScope(scope);
         }
 
         public void RemoveScope(T type)
         {
-            this._type = type;
+            this.type = type;
             base.RemoveScope();
         }
     }

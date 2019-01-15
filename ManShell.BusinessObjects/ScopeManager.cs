@@ -6,17 +6,17 @@ namespace ManShell.BusinessObjects
 {
     public class ScopeManager
     {
-        private static ScopeManager _instance = new ScopeManager();
-        private Scope _global;
-        private Scope _localScope;
+        private static ScopeManager instance = new ScopeManager();
+        private Scope global;
+        private Scope localScope;
 
         public Scope Global
         {
             get
             {
-                if (this._global == null)
-                    this._global = new Scope(new GlobalScope());
-                return this._global;
+                if (this.global == null)
+                    this.global = new Scope(new GlobalScope());
+                return this.global;
             }
         }
 
@@ -24,9 +24,9 @@ namespace ManShell.BusinessObjects
         {
             get
             {
-                if (_instance == null)
-                    _instance = new ScopeManager();
-                return _instance;
+                if (instance == null)
+                    instance = new ScopeManager();
+                return instance;
             }
         }
 
@@ -34,12 +34,12 @@ namespace ManShell.BusinessObjects
 
         public Stack<string> GetStringScopes()
         {
-            if (this._localScope == null)
-                return new Stack<string>(new string[1] { this._global.Name });
+            if (this.localScope == null)
+                return new Stack<string>(new string[1] { this.global.Name });
 
-            Stack<string> strStack = new Stack<string>();
+            var strStack = new Stack<string>();
 
-            IScope[] temp = this._localScope.ActualScopes.ToArray<IScope>();
+            IScope[] temp = this.localScope.ActualScopes.ToArray<IScope>();
 
             for (int i = temp.Length; i > 0; i--)
                 strStack.Push(temp[i].Name);
@@ -52,8 +52,8 @@ namespace ManShell.BusinessObjects
 
         public Scope GetCurrentScope()
         {
-            if (this._localScope != null)
-                return this._localScope;
+            if (this.localScope != null)
+                return this.localScope;
             return this.Global;
         }
 
@@ -62,7 +62,7 @@ namespace ManShell.BusinessObjects
             if (scope == null)
                 throw new ArgumentNullException();
 
-            this._localScope = scope;
+            this.localScope = scope;
         }
     }
 

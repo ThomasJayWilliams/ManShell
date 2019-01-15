@@ -8,16 +8,16 @@ namespace MicroStorage
 {
     public static class DataManager
     {
-        private static JSONDataModel _data;
-        private static string _json;
+        private static JSONDataModel data;
+        private static string json;
 
         public static string JSON
         {
             get
             {
-                if (_json == null)
-                    _json = string.Empty;
-                return _json;
+                if (json == null)
+                    json = string.Empty;
+                return json;
             }
         }
 
@@ -25,30 +25,30 @@ namespace MicroStorage
         {
             get
             {
-                if (_data == null)
-                    _data = new JSONDataModel();
-                return _data;
+                if (data == null)
+                    data = new JSONDataModel();
+                return data;
             }
         }
 
-        public static void Load(string data)
+        public static void Load(string arg)
         {
-            _data = new JSONDataModel();
+            data = new JSONDataModel();
+            json = arg;
 
-            _json = data;
             ParseToData();
         }
 
         public static void ParseToData()
         {
-            if (!string.IsNullOrEmpty(_json))
-                _data = JsonConvert.DeserializeObject<JSONDataModel>(_json);
+            if (!string.IsNullOrEmpty(json))
+                data = JsonConvert.DeserializeObject<JSONDataModel>(json);
         }
 
         public static void ParseToJSON()
         {
-            if (_data != null)
-                _json = JsonConvert.SerializeObject(_data);
+            if (data != null)
+                json = JsonConvert.SerializeObject(data);
         }
 
         public static void AddCategory(string categoryName)
@@ -59,14 +59,14 @@ namespace MicroStorage
             if (IsElementExist(categoryName))
                 throw new DuplicateInsertingException();
 
-            Category category = new Category()
+            var category = new Category()
             {
                 CategoryName = categoryName
             };
 
-            List<Category> tempList = _data.Categories.ToList<Category>();
+            List<Category> tempList = data.Categories.ToList<Category>();
             tempList.Add(category);
-            _data.Categories = tempList.ToArray<Category>();
+            data.Categories = tempList.ToArray<Category>();
         }
 
         public static void AddContent(string entryName, string content)
@@ -95,12 +95,12 @@ namespace MicroStorage
             if (!IsElementExist(categoryName))
                 throw new CategoryNotFoundException();
 
-            Entry entry = new Entry()
+            var entry = new Entry()
             {
                 EntryName = entryName
             };
 
-            Category category = _data.Categories.ToList<Category>().Find(c => c.CategoryName == categoryName);
+            Category category = data.Categories.ToList<Category>().Find(c => c.CategoryName == categoryName);
             List<Entry> items = category.Items.ToList<Entry>();
             items.Add(entry);
             category.Items = items.ToArray<Entry>();
@@ -111,8 +111,8 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");
 
-            Entry entry = new Entry();
-            Category category = new Category();
+            var entry = new Entry();
+            var category = new Category();
             category = GetCategoryByEntryName(name);
 
             if (category == null)
@@ -128,9 +128,9 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");
 
-            Category category = new Category();
+            var category = new Category();
 
-            category = _data.Categories
+            category = data.Categories
                 .ToList<Category>()
                     .Find(c => c.Items.ToList<Entry>().Find(e => string.CompareOrdinal(e.EntryName, name) == 0) != null);
 
@@ -142,8 +142,8 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");
 
-            Category category = new Category();
-            category = _data.Categories.ToList<Category>().Find(c => string.CompareOrdinal(c.CategoryName, name) == 0);
+            var category = new Category();
+            category = data.Categories.ToList<Category>().Find(c => string.CompareOrdinal(c.CategoryName, name) == 0);
 
             return category;
         }
@@ -173,7 +173,7 @@ namespace MicroStorage
 
         internal static bool IsElementExist(string name)
         {
-            bool result = false;
+            var result = false;
 
             if (GetEntryByName(name) != null ^ GetCategoryByName(name) != null)
                 result = true;

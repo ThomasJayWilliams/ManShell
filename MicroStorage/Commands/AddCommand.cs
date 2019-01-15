@@ -9,7 +9,7 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(argument))
                 throw new ArgumentNullException("argument", "Argument required for this command!");
 
-            this._argument = argument;
+            this.argument = argument;
         }
 
         internal override void Invoke()
@@ -17,27 +17,27 @@ namespace MicroStorage
             ScopeType type = LocalScopeManager.Current.Scope.Type;
 
             if (type != ScopeType.Entry)
-                this._argument = this._argument.ToLower();
+                this.argument = this.argument.ToLower();
 
             switch (type)
             {
                 case ScopeType.Enviroment:
-                    DataManager.AddCategory(this._argument);
+                    DataManager.AddCategory(this.argument);
                     break;
                 case ScopeType.Category:
                     string category = LocalScopeManager.Current.Scope.Name,
-                        entryName = this._argument;
+                        entryName = this.argument;
                     DataManager.AddEntry(category, entryName);
                     break;
                 case ScopeType.Entry:
                     string entry = LocalScopeManager.Current.Scope.Name;
-                    DataManager.AddContent(entry, _argument);
+                    DataManager.AddContent(entry, argument);
                     break;
                 default:
                     throw new InvalidScopeException();
             }
 
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
             
             DataManager.ParseToJSON();
             FileManager.Save(DataManager.JSON);

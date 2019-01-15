@@ -5,32 +5,32 @@ namespace MicroStorage
 {
     public static class FileManager
     {
-        private static string _localPath = Environment.CurrentDirectory;
-        private static string _dirName = "microstorage";
-        private static string _fileName = "storage.json";
-        private static string _fullFileName = _localPath + "\\" + _dirName + "\\" + _fileName;
+        private static string localPath = Environment.CurrentDirectory;
+        private static string dirName = "microstorage";
+        private static string fileName = "storage.json";
+        private static string fullFileName = localPath + "\\" + dirName + "\\" + fileName;
 
         public static void Save(string arg)
         {
             if (string.IsNullOrEmpty(arg))
                 throw new ArgumentNullException();
-            if (!File.Exists(_fullFileName))
-                File.Create(_fullFileName);
-            File.WriteAllText(_fullFileName, arg);
+            if (!File.Exists(fullFileName))
+                File.Create(fullFileName);
+            File.WriteAllText(fullFileName, arg);
         }
 
         public static string GetData()
         {
-            string data = string.Empty;
+            var data = string.Empty;
 
-            if (!File.Exists(_fullFileName))
+            if (!File.Exists(fullFileName))
             {
-                Directory.CreateDirectory(_dirName);
-                FileStream file = File.Create(_fullFileName);
+                Directory.CreateDirectory(dirName);
+                FileStream file = File.Create(fullFileName);
                 file.Close();
             }
 
-            StreamReader reader = new StreamReader(_fullFileName);
+            var reader = new StreamReader(fullFileName);
             data = reader.ReadToEnd();
             reader.Close();
 

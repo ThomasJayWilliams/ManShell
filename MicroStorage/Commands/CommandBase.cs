@@ -2,17 +2,17 @@
 {
     internal abstract class CommandBase
     {
-        protected bool _isSuccessfull;
-        protected string _argument;
+        protected bool isSuccessfull;
+        protected string argument;
 
         internal bool IsSuccessfull
         {
-            get { return this._isSuccessfull; }
+            get { return this.isSuccessfull; }
         }
 
         internal string Argument
         {
-            get { return this._argument; }
+            get { return this.argument; }
         }
 
         internal abstract void Invoke();

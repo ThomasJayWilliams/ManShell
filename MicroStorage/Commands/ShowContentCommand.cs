@@ -19,7 +19,7 @@ namespace MicroStorage
                     break;
             }
 
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
         }
 
         private void ShowEntries()
@@ -32,7 +32,7 @@ namespace MicroStorage
             else
                 throw new EntryNotFoundException("No entries have been found!");
 
-            List<string> strList = new List<string>();
+            var strList = new List<string>();
             foreach (Entry item in eList)
                 strList.Add(item.EntryName);
 

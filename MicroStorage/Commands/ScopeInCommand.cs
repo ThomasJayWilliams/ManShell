@@ -8,19 +8,19 @@ namespace MicroStorage
         {
             if (arg == null)
                 throw new ArgumentNullException("arg", "Argument is required for this command!");
-            this._argument = arg;
+            this.argument = arg;
         }
 
         internal override void Invoke()
         {
-            ScopeType type = ScopeType.Enviroment;
+            var type = ScopeType.Enviroment;
 
-            if (!DataManager.GetTypeByName(this._argument, ref type))
+            if (!DataManager.GetTypeByName(this.argument, ref type))
                 throw new InvalidScopeException("Object to scope is not found!");
 
-            LocalScopeManager.Current.SetScope(this._argument, type);
+            LocalScopeManager.Current.SetScope(this.argument, type);
 
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
         }
     }
 }

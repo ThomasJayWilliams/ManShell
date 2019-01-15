@@ -8,13 +8,13 @@ namespace ManShell
 {
     internal static class ConsoleWrapper
     {
-        internal static ConsoleColor ScopeColor = ConsoleColor.Yellow;
-        internal static ConsoleColor OutputColor = ConsoleColor.Gray;
-        internal static ConsoleColor InputColor = ConsoleColor.Gray;
-        internal static ConsoleColor SplitterColor = ConsoleColor.Yellow;
-        internal static ConsoleColor ElementNameColor = ConsoleColor.Cyan;
-        internal static ConsoleColor PointerColor = ConsoleColor.Green;
-        internal static ConsoleColor ErrorColor = ConsoleColor.Red;
+        internal static ConsoleColor scopeColor = ConsoleColor.Yellow;
+        internal static ConsoleColor outputColor = ConsoleColor.Gray;
+        internal static ConsoleColor inputColor = ConsoleColor.Gray;
+        internal static ConsoleColor splitterColor = ConsoleColor.Yellow;
+        internal static ConsoleColor elementNameColor = ConsoleColor.Cyan;
+        internal static ConsoleColor pointerColor = ConsoleColor.Green;
+        internal static ConsoleColor errorColor = ConsoleColor.Red;
 
         internal static void Setup()
         {
@@ -25,18 +25,14 @@ namespace ManShell
         internal static void ShowError(string errorText)
         {
             if (!string.IsNullOrEmpty(errorText))
-                WriteLine(errorText, ErrorColor);
+                WriteLine(errorText, errorColor);
         }
 
         internal static string Read()
         {
-            string result = string.Empty;
-
-            Console.ForegroundColor = InputColor;
-            object temp = Console.ReadLine();
-            Console.ForegroundColor = OutputColor;
-
-            result = temp as string;
+            Console.ForegroundColor = inputColor;
+            string result = Console.ReadLine();
+            Console.ForegroundColor = outputColor;
 
             if (result == null)
                 result = string.Empty;
@@ -47,29 +43,29 @@ namespace ManShell
         internal static void WriteScope()
         {
             Scope currentScope = Application.ScopeManager.GetCurrentScope();
-            Stack<IScope> tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
-            string typeName = string.Empty;
+            var tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
+            var typeName = string.Empty;
 
             for (int i = 0; i < currentScope.ActualScopes.Count; i++)
             {
                 IScope scope = tempStack.Pop();
                 if (scope != null)
                 {
-                    Write(scope.Name, ScopeColor);
+                    Write(scope.Name, scopeColor);
 
                     if (i == currentScope.ActualScopes.Count - 1 && !string.IsNullOrEmpty(scope.TypeName))
                     {
                         typeName = "(" + scope.TypeName.ToLower() + ")";
-                            Write(typeName, ElementNameColor);
+                            Write(typeName, elementNameColor);
                     }
 
                     else if (i < currentScope.ActualScopes.Count - 1)
-                        Write("/", SplitterColor);
+                        Write("/", splitterColor);
                 }
             }
 
-            Write(" ~", PointerColor);
-            Write("\n$ ", OutputColor);
+            Write(" ~", pointerColor);
+            Write("\n$ ", outputColor);
         }
 
         internal static void Write(string arg)
@@ -88,14 +84,14 @@ namespace ManShell
         {
             Console.ForegroundColor = color;
             WriteLine(arg);
-            Console.ForegroundColor = OutputColor;
+            Console.ForegroundColor = outputColor;
         }
 
         internal static void Write(string arg, ConsoleColor color)
         {
             Console.ForegroundColor = color;
             Write(arg);
-            Console.ForegroundColor = OutputColor;
+            Console.ForegroundColor = outputColor;
         }
     }
 }

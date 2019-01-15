@@ -4,17 +4,17 @@ namespace ManShell.BusinessObjects
 {
     public class Application
     {
-        private static Application _instance = new Application();
-        private static ScopeManager _scopeManager = ScopeManager.Current;
-        private IApplication _currentApplication;
+        private static Application instance = new Application();
+        private static ScopeManager scopeManager = ScopeManager.Current;
+        private IApplication currentApplication;
 
         public static ScopeManager ScopeManager
         {
             get
             {
-                if (_scopeManager == null)
-                    _scopeManager = ScopeManager.Current;
-                return _scopeManager;
+                if (scopeManager == null)
+                    scopeManager = ScopeManager.Current;
+                return scopeManager;
             }
         }
 
@@ -22,9 +22,9 @@ namespace ManShell.BusinessObjects
         {
             get
             {
-                if (_instance == null)
-                    _instance = new Application();
-                return _instance;
+                if (instance == null)
+                    instance = new Application();
+                return instance;
             }
         }
 
@@ -32,14 +32,14 @@ namespace ManShell.BusinessObjects
 
         public void RunCommand(string command)
         {
-            this._currentApplication.RunCommand(command);
+            this.currentApplication.RunCommand(command);
         }
 
         public void LoadApplication(IApplication app)
         {
             if (app != null)
-                this._currentApplication = app;
-            this._currentApplication.Load();
+                this.currentApplication = app;
+            this.currentApplication.Load();
         }
 
         public static void UnloadApplication()
@@ -54,21 +54,21 @@ namespace ManShell.BusinessObjects
             public const int MaxScopesInRow = 10;
 
             // Static members
-            private static string _toOutput = string.Empty;
-            private static List<string> _listToOutput = new List<string>();
+            private static string toOutput = string.Empty;
+            private static List<string> listToOutput = new List<string>();
 
             public static string ToOutput
             {
                 get
                 {
-                    if (_toOutput == null)
-                        _toOutput = string.Empty;
-                    return _toOutput;
+                    if (toOutput == null)
+                        toOutput = string.Empty;
+                    return toOutput;
                 }
                 set
                 {
                     if (value != null)
-                        _toOutput = value;
+                        toOutput = value;
                 }
             }
 
@@ -76,14 +76,14 @@ namespace ManShell.BusinessObjects
             {
                 get
                 {
-                    if (_listToOutput == null)
-                        _listToOutput = new List<string>();
-                    return _listToOutput;
+                    if (listToOutput == null)
+                        listToOutput = new List<string>();
+                    return listToOutput;
                 }
                 set
                 {
                     if (value != null)
-                        _listToOutput = value;
+                        listToOutput = value;
                 }
             }
         }

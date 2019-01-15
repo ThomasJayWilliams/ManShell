@@ -11,7 +11,7 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(argument) && LocalScopeManager.Current.Scope.Type != ScopeType.Entry)
                 throw new NoCommandArgumentException("Argument is required for this command!");
 
-            this._argument = argument;
+            this.argument = argument;
         }
 
         internal override void Invoke()
@@ -22,13 +22,13 @@ namespace MicroStorage
             {
                 if (DataManager.Data.Categories != null && DataManager.Data.Categories.Length > 0)
                 {
-                    if (this._argument == "all")
+                    if (this.argument == "all")
                         DataManager.Data.Categories = new Category[0];
 
                     else
                     {
                         List<Category> cats = DataManager.Data.Categories.ToList<Category>();
-                        Category category = DataManager.GetCategoryByName(this._argument);
+                        Category category = DataManager.GetCategoryByName(this.argument);
 
                         if (category != null)
                             cats.Remove(category);
@@ -47,13 +47,13 @@ namespace MicroStorage
                 {
                     Category cat = DataManager.GetCategoryByName(LocalScopeManager.Current.Scope.Name);
 
-                    if (this._argument == "all")
+                    if (this.argument == "all")
                         cat.Items = new Entry[0];
 
                     else if (cat.Items != null && cat.Items.Length > 0)
                     {
                         List<Entry> entries = cat.Items.ToList<Entry>();
-                        Entry entry = DataManager.GetEntryByName(this._argument);
+                        Entry entry = DataManager.GetEntryByName(this.argument);
 
                         if (entry != null)
                             entries.Remove(entry);
@@ -73,7 +73,7 @@ namespace MicroStorage
             {
                 Entry entry = DataManager.GetEntryByName(LocalScopeManager.Current.Scope.Name);
 
-                if (entry != null && string.IsNullOrEmpty(this._argument))
+                if (entry != null && string.IsNullOrEmpty(this.argument))
                     entry.EntryData = string.Empty;
 
                 else
@@ -83,7 +83,7 @@ namespace MicroStorage
             DataManager.ParseToJSON();
             FileManager.Save(DataManager.JSON);
 
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
         }
     }
 }

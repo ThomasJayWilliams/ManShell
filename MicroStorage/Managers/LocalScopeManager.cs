@@ -6,16 +6,16 @@ namespace MicroStorage
 {
     public class LocalScopeManager
     {
-        private static LocalScopeManager _instance = new LocalScopeManager();
-        private Scope<ScopeType> _localScope;
+        private static LocalScopeManager instance = new LocalScopeManager();
+        private Scope<ScopeType> localScope;
 
         public static LocalScopeManager Current
         {
             get
             {
-                if (_instance == null)
-                    _instance = new LocalScopeManager();
-                return _instance;
+                if (instance == null)
+                    instance = new LocalScopeManager();
+                return instance;
             }
         }
 
@@ -23,10 +23,10 @@ namespace MicroStorage
         {
             get
             {
-                if (this._localScope == null)
-                    this._localScope = new Scope<ScopeType>(
+                if (this.localScope == null)
+                    this.localScope = new Scope<ScopeType>(
                         new LocalScope(Globals.AppName, ScopeType.Enviroment), ScopeType.Enviroment);
-                return this._localScope;
+                return this.localScope;
             }
         }
 
@@ -41,23 +41,23 @@ namespace MicroStorage
                 throw new InvalidScopeException();
 
             if (type == ScopeType.Enviroment)
-                this._localScope = new Scope<ScopeType>(new LocalScope(name, type), type);
-            else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Category)
+                this.localScope = new Scope<ScopeType>(new LocalScope(name, type), type);
+            else if (this.localScope.Type == ScopeType.Enviroment && type == ScopeType.Category)
             {
-                this._localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
+                this.localScope.AddScope(new LocalScope(name, type, parent: (LocalScope)this.localScope.ActualScopes.Peek()), type);
             }
-            else if (this._localScope.Type == ScopeType.Enviroment && type == ScopeType.Entry)
+            else if (this.localScope.Type == ScopeType.Enviroment && type == ScopeType.Entry)
             {
                 Category category = DataManager.GetCategoryByEntryName(name);
                 if (category == null)
                     throw new InvalidScopeException();
 
-                this._localScope.AddScope(new LocalScope(type: (ScopeType)type - 1, name: category.CategoryName, parent: (LocalScope)this._localScope.ActualScopes.Peek()), (ScopeType)type - 1);
-                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
+                this.localScope.AddScope(new LocalScope(type: (ScopeType)type - 1, name: category.CategoryName, parent: (LocalScope)this.localScope.ActualScopes.Peek()), (ScopeType)type - 1);
+                this.localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this.localScope.ActualScopes.Peek()), type);
             }
-            else if (this._localScope.Type == ScopeType.Category && type == ScopeType.Entry)
+            else if (this.localScope.Type == ScopeType.Category && type == ScopeType.Entry)
             {
-                this._localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this._localScope.ActualScopes.Peek()), type);
+                this.localScope.AddScope(new LocalScope(type: type, name: name, parent: (LocalScope)this.localScope.ActualScopes.Peek()), type);
             }
 
             PostScope();
@@ -65,65 +65,65 @@ namespace MicroStorage
 
         public void Unscope()
         {
-            if (this._localScope == null)
+            if (this.localScope == null)
                 throw new InvalidScopeException("Critical error occured! Scope is not set!");
 
-            ScopeType type = ScopeType.Enviroment;
-            if (this._localScope.Type > ScopeType.Enviroment)
-                type = (ScopeType)this._localScope.Type - 1;
+            var type = ScopeType.Enviroment;
+            if (this.localScope.Type > ScopeType.Enviroment)
+                type = (ScopeType)this.localScope.Type - 1;
 
-            this._localScope.RemoveScope(type);
+            this.localScope.RemoveScope(type);
 
             PostScope();
         }
 
         private void PostScope()
         {
-            if (this._localScope != null)
-                Application.ScopeManager.SetupLocalScope(this._localScope);
+            if (this.localScope != null)
+                Application.ScopeManager.SetupLocalScope(this.localScope);
         }
     }
 
     public class LocalScope : IScope
     {
-        private string _name;
-        private IScope _child;
-        private IScope _parent;
-        private ScopeType _type;
+        private string name;
+        private IScope child;
+        private IScope parent;
+        private ScopeType type;
 
         public string Name
         {
-            get { return this._name; }
-            set { this._name = value; }
+            get { return this.name; }
+            set { this.name = value; }
         }
         public IScope Parent
         {
-            get { return this._parent; }
-            set { this._parent = value; }
+            get { return this.parent; }
+            set { this.parent = value; }
         }
         public IScope Child
         {
-            get { return this._child; }
-            set { this._child = value; }
+            get { return this.child; }
+            set { this.child = value; }
         }
         public ScopeType Type
         {
-            get { return this._type; }
-            set { this._type = value; }
+            get { return this.type; }
+            set { this.type = value; }
         }
         public string TypeName
         {
-            get { return this._type.ToString(); }
+            get { return this.type.ToString(); }
         }
 
         public LocalScope(string name, ScopeType type, LocalScope parent = null, LocalScope child = null)
         {
-            this._name = name;
+            this.name = name;
             if (parent != null)
-                this._parent = parent;
+                this.parent = parent;
             if (child != null)
-                this._child = child;
-            this._type = type;
+                this.child = child;
+            this.type = type;
         }
     }
 }

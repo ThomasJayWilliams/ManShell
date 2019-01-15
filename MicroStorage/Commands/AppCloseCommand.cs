@@ -10,7 +10,7 @@ namespace MicroStorage
             FileManager.Save(DataManager.JSON);
             Environment.Exit(0);
 
-            this._isSuccessfull = true;
+            this.isSuccessfull = true;
         }
     }
 }

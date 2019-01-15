@@ -4,9 +4,9 @@ namespace MicroStorage
 {
     public class CommandParser
     {
-        private static CommandParser _instance = new CommandParser();
-        private string _argument;
-        private CommandBase _command;
+        private static CommandParser instance = new CommandParser();
+        private string argument;
+        private CommandBase command;
 
         public event CommandInvokeHandler OnInvoke;
 
@@ -16,28 +16,28 @@ namespace MicroStorage
         {
             get
             {
-                if (_instance == null)
-                    _instance = new CommandParser();
-                return _instance;
+                if (instance == null)
+                    instance = new CommandParser();
+                return instance;
             }
         }
 
         public void RunCommand(string command)
         {
-            this._command = null;
-            this._argument = null;
+            this.command = null;
+            this.argument = null;
 
             if (string.IsNullOrEmpty(command))
                 throw new ArgumentNullException("command");
 
             ParseCommand(command);
 
-            if (this._command == null)
+            if (this.command == null)
                 throw new NoCommandException("No commands have been parsed to run!");
-            if (this._argument == null)
+            if (this.argument == null)
                 throw new NoCommandArgumentException("Command argument cannot be null!");
 
-            this._command.Invoke();
+            this.command.Invoke();
 
             if (this.OnInvoke != null)
                 this.OnInvoke.Invoke(this, new CommandInvokeEventArgs("Command has been invoked!"));
@@ -60,29 +60,29 @@ namespace MicroStorage
             if (string.IsNullOrEmpty(parsedCommand))
                 throw new InvalidCommandException("Command is invalid and cannot be casted!");
 
-            this._argument = arg;
+            this.argument = arg;
             string _loweredArg = arg.ToLower();
 
             switch (parsedCommand)
             {
                 case "add":
-                    this._command = new AddCommand(this._argument);
+                    this.command = new AddCommand(this.argument);
                     break;
                 case "show":
-                    this._command = new ShowContentCommand();
+                    this.command = new ShowContentCommand();
                     break;
                 case "scopein":
-                    this._command = new ScopeInCommand(_loweredArg);
+                    this.command = new ScopeInCommand(_loweredArg);
                     break;
                 case "unscope":
-                    this._command = new UnscopeCommand();
+                    this.command = new UnscopeCommand();
                     break;
                 case "delete":
-                    this._command = new DeleteCommand(_loweredArg);
+                    this.command = new DeleteCommand(_loweredArg);
                     break;
                 case "quit":
                 case "exit":
-                    this._command = new AppCloseCommand();
+                    this.command = new AppCloseCommand();
                     break;
                 default:
                     throw new InvalidCommandException("Invalid command!");

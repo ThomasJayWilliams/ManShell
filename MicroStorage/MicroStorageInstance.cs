@@ -2,15 +2,15 @@
 {
     public class MicroStorageInstance : ManShell.BusinessObjects.IApplication
     {
-        private static MicroStorageInstance _instance = new MicroStorageInstance();
+        private static MicroStorageInstance instance = new MicroStorageInstance();
 
         public static MicroStorageInstance Current
         {
             get
             {
-                if (_instance == null)
-                    _instance = new MicroStorageInstance();
-                return _instance;
+                if (instance == null)
+                    instance = new MicroStorageInstance();
+                return instance;
             }
         }
 
