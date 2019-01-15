@@ -8,17 +8,14 @@ namespace MicroStorage
     {
         internal DeleteCommand(string argument)
         {
-            if (string.IsNullOrEmpty(argument))
-                throw new ArgumentNullException("argument", "Argument is required for this command!");
+            if (string.IsNullOrEmpty(argument) && LocalScopeManager.Current.Scope.Type != ScopeType.Entry)
+                throw new NoCommandArgumentException("Argument is required for this command!");
 
             this._argument = argument;
         }
 
         internal override void Invoke()
         {
-            if (string.IsNullOrEmpty(this._argument) && LocalScopeManager.Current.Scope.Type != ScopeType.Entry)
-                throw new NoCommandArgumentException();
-
             ScopeType type = LocalScopeManager.Current.Scope.Type;
 
             if (type == ScopeType.Enviroment)

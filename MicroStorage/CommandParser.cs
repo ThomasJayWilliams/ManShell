@@ -61,6 +61,7 @@ namespace MicroStorage
                 throw new InvalidCommandException("Command is invalid and cannot be casted!");
 
             this._argument = arg;
+            string _loweredArg = arg.ToLower();
 
             switch (parsedCommand)
             {
@@ -71,13 +72,13 @@ namespace MicroStorage
                     this._command = new ShowContentCommand();
                     break;
                 case "scopein":
-                    this._command = new ScopeInCommand(this._argument);
+                    this._command = new ScopeInCommand(_loweredArg);
                     break;
                 case "unscope":
                     this._command = new UnscopeCommand();
                     break;
                 case "delete":
-                    this._command = new DeleteCommand(this._argument);
+                    this._command = new DeleteCommand(_loweredArg);
                     break;
                 case "quit":
                 case "exit":

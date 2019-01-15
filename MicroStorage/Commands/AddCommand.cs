@@ -16,6 +16,9 @@ namespace MicroStorage
         {
             ScopeType type = LocalScopeManager.Current.Scope.Type;
 
+            if (type != ScopeType.Entry)
+                this._argument = this._argument.ToLower();
+
             switch (type)
             {
                 case ScopeType.Enviroment:
