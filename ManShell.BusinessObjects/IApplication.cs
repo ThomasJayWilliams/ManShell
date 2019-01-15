@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManShell
+namespace ManShell.BusinessObjects
 {
-    public interface IWrapper
+    public interface IApplication
     {
-        void RunApplication(string command);
+        void RunCommand(string command);
+        void Load();
     }
 }

@@ -14,7 +14,12 @@ namespace ManShell.BusinessObjects
 
         public Scope Global
         {
-            get { return this._global; }
+            get
+            {
+                if (this._global == null)
+                    this._global = new Scope(new GlobalScope());
+                return this._global;
+            }
         }
 
         public static ScopeManager Current
@@ -27,17 +32,31 @@ namespace ManShell.BusinessObjects
             }
         }
 
-        private ScopeManager()
+        private ScopeManager() { }
+
+        public Stack<string> GetStringScopes()
         {
-            GlobalScope global = new GlobalScope();
-            this._global = new Scope(global);
+            if (this._localScope == null)
+                return new Stack<string>(new string[1] { this._global.Name });
+
+            Stack<string> strStack = new Stack<string>();
+
+            IScope[] temp = this._localScope.ActualScopes.ToArray<IScope>();
+
+            for (int i = temp.Length; i > 0; i--)
+                strStack.Push(temp[i].Name);
+
+            if (strStack.Count == 0)
+                throw new NullReferenceException("Scope is empty!");
+
+            return strStack;
         }
 
         public Scope GetCurrentScope()
         {
             if (this._localScope != null)
                 return this._localScope;
-            return this._global;
+            return this.Global;
         }
 
         public void SetupLocalScope(Scope scope)
@@ -53,11 +72,11 @@ namespace ManShell.BusinessObjects
     {
         public string Name
         {
-            get { return Globals.GeneralAppName.ToLower(); }
+            get { return Application.Globals.GeneralAppName.ToLower(); }
             set { }
         }
         public IScope Parent { get { return null; } set { } }
         public IScope Child { get { return null; } set { } }
-        public string TypeName { get { return Globals.GeneralAppName; } }
+        public string TypeName { get { return Application.Globals.GeneralAppName; } }
     }
 }

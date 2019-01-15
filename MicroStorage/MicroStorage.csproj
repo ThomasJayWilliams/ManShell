@@ -65,6 +65,7 @@
     <Compile Include="Managers\LocalScopeManager.cs" />
     <Compile Include="Managers\DataManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="MicroStorageInstance.cs" />
     <Compile Include="OnLoad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

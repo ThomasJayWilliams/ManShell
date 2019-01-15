@@ -12,38 +12,34 @@ namespace ManShell
     {
         private static ScopeManager currentScope = ScopeManager.Current;
 
-        public static Execution ToInvoke;
-
         internal static void Run()
         {
+            IWrapper wrapper = null;
+
             while (true)
             {
+                ConsoleWrapper.WriteScope();
                 string command = ConsoleWrapper.Read();
-                if (ToInvoke != null)
-                {
-                    try
-                    {
-                        ToInvoke.Invoke(command);
-                    }
-                    catch (Exception ex)
-                    {
-                        ConsoleWrapper.ShowError(ex.Message);
-                    }
-                }
 
-                if (!string.IsNullOrEmpty(Globals.ToOutput))
+                if (wrapper != null)
+                    wrapper.RunApplication(command);
+
+                if (wrapper == null)
+                    wrapper = BaseCommandRunner.RunApp(command);
+
+                if (!string.IsNullOrEmpty(Application.Globals.ToOutput))
                 {
                     ConsoleWrapper.WriteLine(" ");
-                    ConsoleWrapper.WriteLine(Globals.ToOutput);
-                    Globals.ToOutput = string.Empty;
+                    ConsoleWrapper.WriteLine(Application.Globals.ToOutput);
+                    Application.Globals.ToOutput = string.Empty;
                 }
 
-                if (Globals.ListToOutput.Count > 0)
+                if (Application.Globals.ListToOutput.Count > 0)
                 {
                     ConsoleWrapper.WriteLine(" ");
-                    foreach (string item in Globals.ListToOutput)
+                    foreach (string item in Application.Globals.ListToOutput)
                         ConsoleWrapper.WriteLine(item);
-                    Globals.ListToOutput = new List<string>();
+                    Application.Globals.ListToOutput = new List<string>();
                 }
 
                 ConsoleWrapper.WriteLine(" ");

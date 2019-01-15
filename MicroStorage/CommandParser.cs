@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
     public class CommandParser
@@ -26,8 +28,16 @@ namespace MicroStorage
             }
         }
 
-        private void RunCommand()
+        public void RunCommand(string command)
         {
+            this._command = null;
+            this._argument = null;
+
+            if (string.IsNullOrEmpty(command))
+                throw new ArgumentNullException("command");
+
+            ParseCommand(command);
+
             if (this._command == null)
                 throw new NoCommandException("No commands have been parsed to run!");
             if (this._argument == null)
@@ -39,14 +49,8 @@ namespace MicroStorage
                 this.OnInvoke.Invoke(this, new CommandInvokeEventArgs("Command has been invoked!"));
         }
 
-        public void ParseCommand(string command)
+        private void ParseCommand(string command)
         {
-            this._command = null;
-            this._argument = null;
-
-            if (string.IsNullOrEmpty(command))
-                throw new ArgumentNullException("command");
-
             string arg = string.Empty,
                 parsedCommand = string.Empty;
             int splitterIndex = command.IndexOf(" ", 0);
@@ -88,8 +92,6 @@ namespace MicroStorage
                 default:
                     throw new InvalidCommandException("Invalid command!");
             }
-
-            RunCommand();
         }
     }
 }

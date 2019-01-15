@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MicroStorage;
 using ManShell.BusinessObjects;
 
 namespace ManShell
@@ -35,8 +34,6 @@ namespace ManShell
         {
             string result = string.Empty;
 
-            WriteScope();
-
             Console.ForegroundColor = InputColor;
             object temp = Console.ReadLine();
             Console.ForegroundColor = OutputColor;
@@ -49,9 +46,9 @@ namespace ManShell
             return result;
         }
 
-        private static void WriteScope()
+        internal static void WriteScope()
         {
-            Scope currentScope = ScopeManager.Current.GetCurrentScope();
+            Scope currentScope = Application.ScopeManager.GetCurrentScope();
             Stack<IScope> tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
             string typeName = string.Empty;
 

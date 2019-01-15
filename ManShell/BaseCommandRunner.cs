@@ -8,12 +8,10 @@ namespace ManShell
 {
     internal static class BaseCommandRunner
     {
-        internal static void RunApp(string arg)
+        internal static IWrapper RunApp(string arg)
         {
             if (!string.IsNullOrEmpty(arg))
             {
-                IWrapper wrapper;
-
                 switch (arg.ToLower())
                 {
                     case "quit":
@@ -21,13 +19,13 @@ namespace ManShell
                         EndSession();
                         break;
                     case "microstorage":
-                        wrapper = new MicroStorageWrapper();
-                        wrapper.RunApplication();
-                        break;
+                        return new MicroStorageWrapper();
                     default:
                         throw new InvalidCommandException();
                 }                
             }
+
+            return null;
         }
 
         private static void EndSession()
