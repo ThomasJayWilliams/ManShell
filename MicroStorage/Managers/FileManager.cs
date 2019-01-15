@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace MicroStorage
@@ -10,8 +6,8 @@ namespace MicroStorage
     public static class FileManager
     {
         private static string _localPath = Environment.CurrentDirectory;
-        private static string _dirName = "data";
-        private static string _fileName = "storage.dat";
+        private static string _dirName = "microstorage";
+        private static string _fileName = "storage.json";
         private static string _fullFileName = _localPath + "\\" + _dirName + "\\" + _fileName;
 
         public static void Save(string arg)

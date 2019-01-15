@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ManShell
+﻿namespace ManShell
 {
     public class EntryPoint
     {
