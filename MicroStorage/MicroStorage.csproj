@@ -40,6 +40,7 @@
     <Compile Include="CommandParser.cs" />
     <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\AppCloseCommand.cs" />
+    <Compile Include="Commands\BackupCommand.cs" />
     <Compile Include="Commands\DeleteCommand.cs" />
     <Compile Include="Commands\ScopeInCommand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventArgs\CommandInvokeEventArgs.cs" />
+    <Compile Include="EventArgs\FileLoadingHandler.cs" />
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />
     <Compile Include="Exceptions\DuplicateInsertingException.cs" />
     <Compile Include="Exceptions\EntryNotFoundException.cs" />

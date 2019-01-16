@@ -80,6 +80,9 @@ namespace MicroStorage
                 case "delete":
                     this.command = new DeleteCommand(_loweredArg);
                     break;
+                case "backup":
+                    this.command = new BackupCommand(_loweredArg);
+                    break;
                 case "quit":
                 case "exit":
                     this.command = new AppCloseCommand();

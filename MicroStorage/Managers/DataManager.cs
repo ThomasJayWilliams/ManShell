@@ -137,6 +137,12 @@ namespace MicroStorage
             return category;
         }
 
+        public static void OnFileLoading(FileLoadingEventArgs e)
+        {
+            if (e != null)
+                Load(e.FileData);
+        }
+
         public static Category GetCategoryByName(string name)
         {
             if (string.IsNullOrEmpty(name))
