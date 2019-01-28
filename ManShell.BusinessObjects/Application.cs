@@ -2,19 +2,19 @@
 
 namespace ManShell.BusinessObjects
 {
-    public class Application
+    public sealed class Application
     {
         private static Application instance = new Application();
-        private static ScopeManager scopeManager = ScopeManager.Current;
+        private ScopeManager scopeManager = ScopeManager.Current;
         private IApplication currentApplication;
 
-        public static ScopeManager ScopeManager
+        public ScopeManager ScopeManager
         {
             get
             {
-                if (scopeManager == null)
-                    scopeManager = ScopeManager.Current;
-                return scopeManager;
+                if (this.scopeManager == null)
+                    this.scopeManager = ScopeManager.Current;
+                return this.scopeManager;
             }
         }
 

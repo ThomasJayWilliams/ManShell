@@ -8,9 +8,28 @@ namespace ManShell
     {
         private static ScopeManager currentScope = ScopeManager.Current;
 
-        internal static void Run()
+        private static IWrapper TryGetAppByName(string name)
         {
             IWrapper wrapper = null;
+
+            switch (name)
+            {
+                case "microstorage":
+                    wrapper = new MicroStorageWrapper();
+                    break;
+                default:
+                    return null;
+            }
+
+            return wrapper;
+        }
+
+        internal static void Run(string[] args)
+        {
+            IWrapper wrapper = null;
+
+            if (args.Length > 0)
+                wrapper = TryGetAppByName(args[0]);
 
             while (true)
             {

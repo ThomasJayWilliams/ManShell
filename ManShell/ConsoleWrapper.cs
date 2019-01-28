@@ -42,7 +42,7 @@ namespace ManShell
 
         internal static void WriteScope()
         {
-            Scope currentScope = Application.ScopeManager.GetCurrentScope();
+            Scope currentScope = Application.Current.ScopeManager.GetCurrentScope();
             var tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());
             var typeName = string.Empty;
 

@@ -1,6 +1,6 @@
 ﻿namespace MicroStorage
 {
-    public class MicroStorageInstance : ManShell.BusinessObjects.IApplication
+    public sealed class MicroStorageInstance : ManShell.BusinessObjects.IApplication
     {
         private static MicroStorageInstance instance = new MicroStorageInstance();
 

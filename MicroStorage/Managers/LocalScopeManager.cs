@@ -80,7 +80,7 @@ namespace MicroStorage
         private void PostScope()
         {
             if (this.localScope != null)
-                Application.ScopeManager.SetupLocalScope(this.localScope);
+                Application.Current.ScopeManager.SetupLocalScope(this.localScope);
         }
     }
 

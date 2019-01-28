@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ManShell.BusinessObjects
 {
-    public class ScopeManager
+    public sealed class ScopeManager
     {
         private static ScopeManager instance = new ScopeManager();
         private Scope global;
