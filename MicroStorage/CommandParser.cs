@@ -65,6 +65,9 @@ namespace MicroStorage
 
             switch (parsedCommand)
             {
+                case "help":
+                    this.command = new HelpCommand();
+                    break;
                 case "add":
                     this.command = new AddCommand(this.argument);
                     break;

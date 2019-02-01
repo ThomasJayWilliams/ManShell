@@ -42,6 +42,7 @@
     <Compile Include="Commands\AppCloseCommand.cs" />
     <Compile Include="Commands\BackupCommand.cs" />
     <Compile Include="Commands\DeleteCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ScopeInCommand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />
     <Compile Include="Commands\UnscopeCommand.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />
     <Compile Include="Exceptions\DuplicateInsertingException.cs" />
     <Compile Include="Exceptions\EntryNotFoundException.cs" />
+    <Compile Include="Exceptions\FileIsEmptyException.cs" />
     <Compile Include="Exceptions\InvalidCommandException.cs" />
     <Compile Include="Exceptions\NoCommandArgumentException.cs" />
     <Compile Include="Exceptions\NoCommandFoundException.cs" />

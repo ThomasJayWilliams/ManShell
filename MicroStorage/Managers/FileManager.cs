@@ -11,6 +11,7 @@ namespace MicroStorage
         private static string fullFileName = localPath + "\\" + dirName + "\\" + fileName;
         private static string backupFileName = "storage.backup.json";
         private static string fullBackupFileName = localPath + "\\" + dirName + "\\" + backupFileName;
+        private static string helpFullFileName = localPath + "\\" + dirName + "\\" + "help.txt";
 
         internal static event FileLoadingHandler OnLoadHandler;
 
@@ -21,6 +22,17 @@ namespace MicroStorage
             if (!File.Exists(fullFileName))
                 File.Create(fullFileName);
             File.WriteAllText(fullFileName, arg);
+        }
+
+        public static string GetHelpInfo()
+        {
+            var str = string.Empty;
+            if (File.Exists(helpFullFileName))
+                using (var reader = new StreamReader(helpFullFileName))
+                    str = reader.ReadToEnd();
+            else
+                CreateFile(helpFullFileName);
+            return str;
         }
 
         public static void LoadBackup()

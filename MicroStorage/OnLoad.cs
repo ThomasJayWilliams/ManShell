@@ -13,6 +13,8 @@ namespace MicroStorage
 
             FileManager.OnLoadHandler += DataManager.OnFileLoading;
 
+            FileManager.GetHelpInfo();
+
             LocalScopeManager.Current.SetScope(Globals.AppName.ToLower(), ScopeType.Enviroment);
         }
     }
