@@ -1,11 +1,9 @@
-﻿using System;
-
-using ManShell.BusinessObjects;
+﻿using ManShell.BusinessObjects;
 using MicroStorage;
 
 namespace ManShell
 {
-    public class MicroStorageWrapper : IWrapper
+	public class MicroStorageWrapper : IWrapper
     {
         public MicroStorageWrapper()
         {

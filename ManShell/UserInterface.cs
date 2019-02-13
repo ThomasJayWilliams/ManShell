@@ -17,6 +17,9 @@ namespace ManShell
                 case "microstorage":
                     wrapper = new MicroStorageWrapper();
                     break;
+				case "dataconverter":
+					wrapper = new DataConverterWrapper();
+					break;
                 default:
                     return null;
             }
@@ -44,19 +47,19 @@ namespace ManShell
                     if (wrapper == null)
                         wrapper = BaseCommandRunner.RunApp(command);
 
-                    if (!string.IsNullOrEmpty(Application.Globals.ToOutput))
+                    if (!string.IsNullOrEmpty(Globals.ToOutput))
                     {
                         ConsoleWrapper.WriteEmptyLine();
-                        ConsoleWrapper.WriteLine(Application.Globals.ToOutput);
-                        Application.Globals.ToOutput = string.Empty;
+                        ConsoleWrapper.WriteLine(Globals.ToOutput);
+                        Globals.ToOutput = string.Empty;
                     }
 
-                    if (Application.Globals.ListToOutput.Count > 0)
+                    if (Globals.ListToOutput.Count > 0)
                     {
                         ConsoleWrapper.WriteEmptyLine();
-                        foreach (string item in Application.Globals.ListToOutput)
+                        foreach (string item in Globals.ListToOutput)
                             ConsoleWrapper.WriteLine(item);
-                        Application.Globals.ListToOutput = new List<string>();
+                        Globals.ListToOutput = new List<string>();
                     }
                 }
 

@@ -16,6 +16,8 @@ namespace ManShell
                         break;
                     case "microstorage":
                         return new MicroStorageWrapper();
+					case "dataconverter":
+						return new DataConverterWrapper();
                     default:
                         throw new InvalidCommandException();
                 }                

@@ -44,6 +44,7 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Wrappers\DataConverterWrapper.cs" />
     <Compile Include="Wrappers\IWrapper.cs" />
     <Compile Include="Wrappers\MicroStorageWrapper.cs" />
     <Compile Include="OnStartUp.cs" />
@@ -55,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataConverter\DataConverter.csproj">
+      <Project>{8daf87da-1492-4394-b5af-9c430d0e3f25}</Project>
+      <Name>DataConverter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ManShell.BusinessObjects\ManShell.BusinessObjects.csproj">
       <Project>{db835c4f-366e-44ea-adfc-ea35dece1f24}</Project>
       <Name>ManShell.BusinessObjects</Name>
