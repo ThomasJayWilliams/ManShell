@@ -37,7 +37,7 @@ namespace MicroStorage
                 strList.Add(item.EntryName);
 
             if (strList.Count > 0)
-                ManShell.BusinessObjects.Application.Globals.ListToOutput = strList;
+                ManShell.BusinessObjects.Globals.ListToOutput = strList;
         }
 
         private void ShowCategories()
@@ -52,7 +52,7 @@ namespace MicroStorage
                 strList.Add(item.CategoryName);
 
             if (strList.Count > 0)
-                ManShell.BusinessObjects.Application.Globals.ListToOutput = strList;
+                ManShell.BusinessObjects.Globals.ListToOutput = strList;
         }
 
         private void ShowContent()
@@ -67,7 +67,7 @@ namespace MicroStorage
             if (entry == null)
                 throw new InvalidCommandException("Error occured while showing content for specified entry!");
 
-            ManShell.BusinessObjects.Application.Globals.ToOutput = entry.EntryData;
+            ManShell.BusinessObjects.Globals.ToOutput = entry.EntryData;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MicroStorage
             var helpInfo = FileManager.GetHelpInfo();
 
             if (!string.IsNullOrEmpty(helpInfo))
-                ManShell.BusinessObjects.Application.Globals.ToOutput = helpInfo;
+                ManShell.BusinessObjects.Globals.ToOutput = helpInfo;
 
             else
                 throw new FileIsEmptyException("help.txt is empty!");

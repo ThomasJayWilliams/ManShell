@@ -70,11 +70,11 @@ namespace ManShell.BusinessObjects
     {
         public string Name
         {
-            get { return Application.Globals.GeneralAppName.ToLower(); }
+            get { return Globals.GeneralAppName.ToLower(); }
             set { }
         }
         public IScope Parent { get { return null; } set { } }
         public IScope Child { get { return null; } set { } }
-        public string TypeName { get { return Application.Globals.GeneralAppName; } }
+        public string TypeName { get { return Globals.GeneralAppName; } }
     }
 }
