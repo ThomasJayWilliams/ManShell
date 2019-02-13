@@ -1,0 +1,7 @@
+ManShell.BusinessObjects/bin
+ManShell.BusinessObjects/obj
+ManShell/bin
+ManShell/obj
+MicroStorage/bin
+MicroStorage/obj
+*.vs
