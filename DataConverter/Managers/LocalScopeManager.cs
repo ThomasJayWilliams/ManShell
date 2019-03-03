@@ -48,6 +48,24 @@ namespace DataConverter
 			PostScope();
 		}
 
+		public void Unscope()
+		{
+			if (this.localScope.Type == ScopeType.Enviroment)
+				throw new InvalidScopeException();
+
+			ScopeType type = ScopeType.Enviroment;
+
+			if (this.localScope.Type == ScopeType.Source)
+				BufferManager.Current.ClearBuffer();
+
+			else
+				type = ScopeType.Source;
+
+			this.localScope.RemoveScope(type);
+
+			PostScope();
+		}
+
 		private void PostScope()
 		{
 			if (this.localScope != null)

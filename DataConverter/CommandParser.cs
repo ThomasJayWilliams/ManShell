@@ -1,6 +1,5 @@
-﻿using System;
-
-using ManShell.BusinessObjects;
+﻿using ManShell.BusinessObjects;
+using System;
 
 namespace DataConverter
 {
@@ -67,6 +66,9 @@ namespace DataConverter
 
 			switch (parsedCommand)
 			{
+				case "goback":
+					this.command = new GoBackCommand();
+					break;
 				case "tojson":
 					this.command = new ToJSONCommand();
 					break;

@@ -44,6 +44,7 @@
     <Compile Include="Commands\AppCloseCommand.cs" />
     <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\GoBackCommand.cs" />
     <Compile Include="Commands\LoadDataCommand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />
     <Compile Include="Commands\ToJSONCommand.cs" />
