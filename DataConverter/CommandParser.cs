@@ -67,17 +67,14 @@ namespace DataConverter
 
 			switch (parsedCommand)
 			{
-				case "jsontoxml":
-					this.command = new JSONToXMLCommand();
+				case "tojson":
+					this.command = new ToJSONCommand();
 					break;
-				case "xmltojson":
-					this.command = new XMLToJSONCommand();
+				case "toxml":
+					this.command = new ToXMLCommand();
 					break;
-				case "loadxml":
-					this.command = new LoadXMLCommand(this.argument);
-					break;
-				case "loadjson":
-					this.command = new LoadJSONCommand(this.argument);
+				case "load":
+					this.command = new LoadDataCommand(this.argument);
 					break;
 				case "show":
 					this.command = new ShowContentCommand();

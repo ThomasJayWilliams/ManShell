@@ -1,4 +1,6 @@
-﻿namespace DataConverter
+﻿using MBO = ManShell.BusinessObjects;
+
+namespace DataConverter
 {
 	internal class ShowContentCommand : CommandBase
 	{
@@ -6,7 +8,15 @@
 		{
 			if (BufferManager.Current.Buffer == null)
 				throw new BufferIsEmptyException();
-			ManShell.BusinessObjects.Globals.ToOutput = BufferManager.Current.Buffer.Data;
+
+			if (LocalScopeManager.Current.Scope.Type == ScopeType.Enviroment)
+				throw new BufferIsEmptyException();
+
+			else if (LocalScopeManager.Current.Scope.Type == ScopeType.Source)
+				MBO.Globals.ToOutput = BufferManager.Current.Buffer.Data;
+
+			else
+				MBO.Globals.ToOutput = BufferManager.Current.Buffer.Converter.OuterString;
 		}
 	}
 }

@@ -7,7 +7,7 @@ namespace DataConverter
 	{
 		string Data { get; }
 		string TypeName { get; }
-		IConverter Converter { get; }
+		IConverter Converter { get; set; }
 
 		void Convert();
 		void LoadFromFile(System.IO.FileInfo file);
@@ -46,17 +46,49 @@ namespace DataConverter
 			return true;
 		}
 
-		internal void CreateJSONBuffer(System.IO.FileInfo info)
+		private bool ValidateFile(string extension)
 		{
-			if (this.CheckBuffer())
-				this.buffer = new JSONBuffer();
-			this.buffer.LoadFromFile(info);
+			foreach (var item in Globals.SupportedExtensions)
+				if (string.CompareOrdinal(item, extension) == 0)
+					return true;
+			return false;
 		}
-		internal void CreateXMLBuffer(System.IO.FileInfo info)
+
+		private IBuffer GetBuffer(string extension)
 		{
-			if (this.CheckBuffer())
-				this.buffer = new XMLBuffer();
-			this.buffer.LoadFromFile(info);
+			switch (extension)
+			{
+				case ".json":
+					return new JSONBuffer();
+				case ".xml":
+					return new XMLBuffer();
+				default:
+					return null;
+			}
+		}
+
+		internal void ConvertToJSON()
+		{
+			if (this.buffer is XMLBuffer)
+				this.buffer.Converter = new XMLToJSONConverter(this.buffer.Data);
+			this.buffer.Convert();
+		}
+
+		internal void ConvertToXML()
+		{
+			if (this.buffer is JSONBuffer)
+				this.buffer.Converter = new JSONToXMLConverter(this.buffer.Data);
+			this.buffer.Convert();
+		}
+
+		internal void CreateBuffer(System.IO.FileInfo info)
+		{
+			if (this.CheckBuffer() && this.ValidateFile(info.Extension))
+			{
+				this.buffer = GetBuffer(info.Extension);
+				if (this.buffer != null)
+					this.buffer.LoadFromFile(info);
+			}
 		}
 
 		internal void ClearBuffer()

@@ -22,6 +22,7 @@ namespace DataConverter.Converters
 			if (this.InnerData == null)
 				throw new System.NullReferenceException();
 			this.OuterData = JsonConvert.SerializeXNode(this.InnerData);
+			this.OuterString = JsonConvert.SerializeXNode(this.InnerData);
 		}
 	}
 }

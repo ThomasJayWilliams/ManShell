@@ -11,7 +11,7 @@ namespace ManShell
         internal static ConsoleColor scopeColor = ConsoleColor.Yellow;
         internal static ConsoleColor outputColor = ConsoleColor.Gray;
         internal static ConsoleColor inputColor = ConsoleColor.Gray;
-        internal static ConsoleColor splitterColor = ConsoleColor.Yellow;
+        internal static ConsoleColor splitterColor = ConsoleColor.Magenta;
         internal static ConsoleColor elementNameColor = ConsoleColor.Cyan;
         internal static ConsoleColor pointerColor = ConsoleColor.Green;
         internal static ConsoleColor errorColor = ConsoleColor.Red;

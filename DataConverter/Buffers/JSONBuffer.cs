@@ -11,17 +11,13 @@ namespace DataConverter
 	internal class JSONBuffer : IBuffer
 	{
 		private string data;
-		private IConverter converter;
 
 		public string Data
 		{
 			get { return this.data; }
 		}
 
-		public IConverter Converter
-		{
-			get { return this.converter; }
-		}
+		public IConverter Converter { get; set; }
 
 		public string TypeName
 		{
@@ -30,8 +26,8 @@ namespace DataConverter
 
 		public void Convert()
 		{
-			this.converter = new JSONToXMLConverter(this.data);
-			this.converter.Convert();
+			this.Converter = new JSONToXMLConverter(this.data);
+			this.Converter.Convert();
 		}
 
 		public void LoadFromFile(FileInfo file)

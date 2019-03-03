@@ -22,6 +22,7 @@ namespace DataConverter.Converters
 			if (this.InnerData == null)
 				throw new System.NullReferenceException();
 			this.OuterData = JsonConvert.DeserializeXNode(this.InnerData.ToString());
+			this.OuterString = this.OuterData.ToString();
 		}
 	}
 }
