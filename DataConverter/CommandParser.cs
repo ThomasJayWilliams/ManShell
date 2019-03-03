@@ -66,6 +66,9 @@ namespace DataConverter
 
 			switch (parsedCommand)
 			{
+				case "save":
+					this.command = new SaveCommand(this.argument);
+					break;
 				case "goback":
 					this.command = new GoBackCommand();
 					break;

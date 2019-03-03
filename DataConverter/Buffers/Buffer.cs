@@ -1,5 +1,6 @@
 ﻿using DataConverter.Converters;
 using ManShell.BusinessObjects;
+using System.IO;
 
 namespace DataConverter
 {
@@ -10,7 +11,7 @@ namespace DataConverter
 		IConverter Converter { get; set; }
 
 		void Convert();
-		void LoadFromFile(System.IO.FileInfo file);
+		void LoadFromFile(FileInfo file);
 	}
 
 	internal class BufferManager
@@ -18,10 +19,16 @@ namespace DataConverter
 		private static BufferManager instance = new BufferManager();
 		private static object lockToken = new object();
 		private IBuffer buffer;
+		private FileInfo file;
 
 		public IBuffer Buffer
 		{
 			get { return this.buffer; }
+		}
+
+		internal FileInfo SourceFile
+		{
+			get { return this.file; }
 		}
 
 		internal static BufferManager Current
@@ -81,13 +88,14 @@ namespace DataConverter
 			this.buffer.Convert();
 		}
 
-		internal void CreateBuffer(System.IO.FileInfo info)
+		internal void CreateBuffer(FileInfo info)
 		{
 			if (this.CheckBuffer() && this.ValidateFile(info.Extension))
 			{
 				this.buffer = GetBuffer(info.Extension);
 				if (this.buffer != null)
 					this.buffer.LoadFromFile(info);
+				this.file = info;
 			}
 		}
 

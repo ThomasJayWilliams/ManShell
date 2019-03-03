@@ -46,6 +46,7 @@
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\GoBackCommand.cs" />
     <Compile Include="Commands\LoadDataCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />
     <Compile Include="Commands\ToJSONCommand.cs" />
     <Compile Include="Commands\ToXMLCommand.cs" />
