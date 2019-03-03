@@ -4,7 +4,9 @@
 	{
 		internal override void Invoke()
 		{
-
+			if (BufferManager.Current == null)
+				throw new BufferIsEmptyException();
+			BufferManager.Current.Buffer.Convert();
 		}
 	}
 }

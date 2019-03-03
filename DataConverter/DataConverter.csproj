@@ -49,6 +49,9 @@
     <Compile Include="Commands\LoadXMLCOmmand.cs" />
     <Compile Include="Commands\ShowContentCommand.cs" />
     <Compile Include="Commands\XMLToJSONCommand.cs" />
+    <Compile Include="Converters\IConverter.cs" />
+    <Compile Include="Converters\JSONConverter.cs" />
+    <Compile Include="Converters\XMLToJSONConverter.cs" />
     <Compile Include="DataConverterInstance.cs" />
     <Compile Include="Exceptions\BufferIsEmptyException.cs" />
     <Compile Include="Globals.cs" />

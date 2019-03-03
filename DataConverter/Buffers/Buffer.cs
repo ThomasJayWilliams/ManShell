@@ -1,4 +1,5 @@
 ﻿using ManShell.BusinessObjects;
+using DataConverter.Converters;
 
 namespace DataConverter
 {
@@ -6,6 +7,9 @@ namespace DataConverter
 	{
 		string Data { get; }
 		string TypeName { get; }
+		IConverter Converter { get; }
+
+		void Convert();
 		void LoadFromFile(System.IO.FileInfo file);
 	}
 
