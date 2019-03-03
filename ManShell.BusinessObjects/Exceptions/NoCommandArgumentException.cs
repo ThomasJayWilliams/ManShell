@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MicroStorage
+namespace ManShell.BusinessObjects
 {
-    public class NoCommandArgumentException : Exception
+	public class NoCommandArgumentException : Exception
     {
         private const string defaultMessage = "The command reuires argument, but no arguments been found!";
 

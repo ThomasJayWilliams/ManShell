@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataConverter
 {
-	class Globals
+	public static class Globals
 	{
+		public const string AppName = "DataConverter";
 	}
 }

@@ -8,6 +8,8 @@ namespace ManShell.BusinessObjects
         private ScopeManager scopeManager = ScopeManager.Current;
         private IApplication currentApplication;
 
+		public event ConfirmationRequest Confirmation;
+
         public ScopeManager ScopeManager
         {
             get
@@ -17,6 +19,13 @@ namespace ManShell.BusinessObjects
                 return this.scopeManager;
             }
         }
+
+		public bool RequestConfirmation(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+				text = "Continue?";
+			return Confirmation.Invoke(text);
+		}
 
         public static Application Current
         {

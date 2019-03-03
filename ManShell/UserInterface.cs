@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using ManShell.BusinessObjects;
 
 namespace ManShell
 {
     internal static class UserInterface
     {
-        private static ScopeManager currentScope = ScopeManager.Current;
-
         private static IWrapper TryGetAppByName(string name)
         {
             IWrapper wrapper = null;
@@ -26,6 +23,19 @@ namespace ManShell
 
             return wrapper;
         }
+
+		internal static bool ReadConfirmation(string text)
+		{
+			ConsoleWrapper.WriteConfirmation(text);
+			string response = ConsoleWrapper.Read();
+			if (response == "y" || response == "yes")
+				return true;
+			else
+			{
+				ConsoleWrapper.WriteLine("Command execution cancelled.");
+				return false;
+			}
+		}
 
         internal static void Run(string[] args)
         {

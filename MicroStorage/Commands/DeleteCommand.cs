@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ManShell.BusinessObjects;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MicroStorage
 {
-    internal class DeleteCommand : CommandBase
+	internal class DeleteCommand : CommandBase
     {
         internal DeleteCommand(string argument)
         {

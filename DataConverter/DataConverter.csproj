@@ -38,9 +38,22 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffers\Buffer.cs" />
+    <Compile Include="Buffers\XMLBuffer.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="Commands\AppCloseCommand.cs" />
+    <Compile Include="Commands\ClearCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\JSONToXMLCommand.cs" />
+    <Compile Include="Commands\LoadJSONCommand.cs" />
+    <Compile Include="Commands\LoadXMLCOmmand.cs" />
+    <Compile Include="Commands\ShowContentCommand.cs" />
+    <Compile Include="Commands\XMLToJSONCommand.cs" />
     <Compile Include="DataConverterInstance.cs" />
+    <Compile Include="Exceptions\BufferIsEmptyException.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Buffers\JSONBuffer.cs" />
+    <Compile Include="Managers\LocalScopeManager.cs" />
     <Compile Include="OnLoad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

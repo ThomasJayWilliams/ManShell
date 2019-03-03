@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
     public static class FileManager

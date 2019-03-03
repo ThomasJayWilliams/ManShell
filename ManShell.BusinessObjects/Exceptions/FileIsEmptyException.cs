@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MicroStorage
+namespace ManShell.BusinessObjects
 {
-    public class FileIsEmptyException : Exception
+	public class FileIsEmptyException : Exception
     {
         private const string defaultMessage = "Requested file is empty!";
 

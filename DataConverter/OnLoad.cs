@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataConverter
 {
-	class OnLoad
+	public class OnLoad
 	{
+		public static void LoadApp()
+		{
+			LocalScopeManager.SetLocalScope(Globals.AppName.ToLower(), Globals.AppName.ToLower());
+		}
 	}
 }

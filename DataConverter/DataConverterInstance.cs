@@ -24,12 +24,12 @@ namespace DataConverter
 
 		public void Load()
 		{
-
+			OnLoad.LoadApp();
 		}
 
 		public void RunCommand(string command)
 		{
-
+			CommandParser.Current.RunCommand(command);
 		}
 	}
 }

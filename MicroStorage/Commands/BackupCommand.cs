@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ManShell.BusinessObjects;
+using System;
 
 namespace MicroStorage
 {
-    internal class BackupCommand : CommandBase
+	internal class BackupCommand : CommandBase
     {
         internal BackupCommand(string arg)
         {

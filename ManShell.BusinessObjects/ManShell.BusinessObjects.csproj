@@ -32,6 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="EventArgs\CommandInvokeEventArgs.cs" />
+    <Compile Include="EventArgs\FileLoadingHandler.cs" />
+    <Compile Include="Exceptions\FileIsEmptyException.cs" />
+    <Compile Include="Exceptions\InvalidCommandException.cs" />
+    <Compile Include="Exceptions\NoCommandArgumentException.cs" />
+    <Compile Include="Exceptions\NoCommandFoundException.cs" />
+    <Compile Include="Exceptions\ScopeIsNotSetException.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="ScopeManager.cs" />

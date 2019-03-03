@@ -40,7 +40,14 @@ namespace ManShell
             return result;
         }
 
-        internal static void WriteScope()
+		internal static void WriteConfirmation(string text)
+		{
+			Write(text, errorColor);
+			WriteLine(" (yes/no): ");
+		}
+
+
+		internal static void WriteScope()
         {
             Scope currentScope = Application.Current.ScopeManager.GetCurrentScope();
             var tempStack = new Stack<IScope>(currentScope.ActualScopes.ToArray<IScope>());

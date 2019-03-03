@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MicroStorage
+namespace ManShell.BusinessObjects
 {
-    public class FileLoadingEventArgs
+	public class FileLoadingEventArgs
     {
         private string fileName;
         private string loadedData;

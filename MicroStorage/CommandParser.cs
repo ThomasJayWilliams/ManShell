@@ -1,18 +1,20 @@
 ﻿using System;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
-    public class CommandParser
+    internal class CommandParser
     {
         private static CommandParser instance = new CommandParser();
         private string argument;
         private CommandBase command;
 
-        public event CommandInvokeHandler OnInvoke;
+        internal event CommandInvokeHandler OnInvoke;
 
         private CommandParser() { }
 
-        public static CommandParser Current
+        internal static CommandParser Current
         {
             get
             {
@@ -22,7 +24,7 @@ namespace MicroStorage
             }
         }
 
-        public void RunCommand(string command)
+        internal void RunCommand(string command)
         {
             this.command = null;
             this.argument = null;

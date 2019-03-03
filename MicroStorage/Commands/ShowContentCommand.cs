@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
     internal class ShowContentCommand : CommandBase

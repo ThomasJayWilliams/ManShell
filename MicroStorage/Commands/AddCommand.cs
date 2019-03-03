@@ -1,5 +1,7 @@
 ﻿using System;
 
+using ManShell.BusinessObjects;
+
 namespace MicroStorage
 {
     internal class AddCommand : CommandBase

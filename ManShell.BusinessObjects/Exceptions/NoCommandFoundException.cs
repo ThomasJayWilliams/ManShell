@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MicroStorage
+namespace ManShell.BusinessObjects
 {
     public class NoCommandException : Exception
     {
